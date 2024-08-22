@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import axios from 'axios';
 
 const ServicePage = () => {
   const { serviceId } = useParams();
@@ -10,12 +11,10 @@ const ServicePage = () => {
   useEffect(() => {
     const fetchProviders = async () => {
       try {
-        const response = await fetch(`http://localhost:5000/api/providers?serviceId=${serviceId}`); 
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        const data = await response.json();
-        setProviders(data);
+        const response = await axios.get(`http://localhost:5000/api/providers`, {
+          params: { serviceId }
+        });
+        setProviders(response.data);
       } catch (err) {
         setError(err.message);
       } finally {
@@ -30,11 +29,11 @@ const ServicePage = () => {
   if (error) return <div>Error: {error}</div>;
 
   return (
-    <div className="service-page container">
+    <div className="container">
       <h1 className="my-4">Providers for Service ID: {serviceId}</h1>
       <div className="row">
         {providers.map((provider) => (
-          <div key={provider.id} className="col-md-4 mb-4">
+          <div key={provider.provider_id} className="col-md-4 mb-4">
             <div className="card">
               <img 
                 src={provider.profile_image || 'default_profile_image_url_here.jpg'} 
