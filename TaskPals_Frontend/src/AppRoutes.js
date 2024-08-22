@@ -7,7 +7,7 @@ import Terms from "./TermsAndPrivacy";
 import ServicePage from "./ServicePage";
 import Auth from "./Auth";
 import CustomerProfile from "./CustomerProfile";
-
+import BookingForm from "./BookingForm";
 function AppRoutes({ isLoggedIn }) { // Accept isLoggedIn as a prop
   return (
         <Router>
@@ -17,6 +17,7 @@ function AppRoutes({ isLoggedIn }) { // Accept isLoggedIn as a prop
             <Route path="/DoNotSellMyInfo" element={<DoNotSellMyInfoPage/>} />
             <Route path="/Legal" element={<Legal/>} />
             <Route path="/service/:serviceId" element={<ServicePage/>}/> 
+            <Route path="/Book" element={<BookingForm/>}/>
             {isLoggedIn ? (
               <Route path="/profile" element={<CustomerProfile />} />
             ) : (
@@ -26,5 +27,4 @@ function AppRoutes({ isLoggedIn }) { // Accept isLoggedIn as a prop
       </Router>
   );
 }
-
 export default AppRoutes;
