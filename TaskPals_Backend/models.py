@@ -1,12 +1,6 @@
-from app import db
+from flask_sqlalchemy import SQLAlchemy
 
-class Customer(db.Model):
-    __tablename__ = 'customers'
-    customer_id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(255), nullable=False)
-    email = db.Column(db.String(255), unique=True, nullable=False)
-    phone = db.Column(db.String(20), nullable=True)
-    created_at = db.Column(db.DateTime, server_default=db.func.now())
+db = SQLAlchemy()
 
 class Provider(db.Model):
     __tablename__ = 'providers'
@@ -19,14 +13,19 @@ class Provider(db.Model):
     rating = db.Column(db.Float, nullable=True)
     created_at = db.Column(db.DateTime, server_default=db.func.now())
 
-class Booking(db.Model):
-    __tablename__ = 'bookings'
-    booking_id = db.Column(db.Integer, primary_key=True)
-    customer_id = db.Column(db.Integer, db.ForeignKey('customers.customer_id'), nullable=False)
-    provider_id = db.Column(db.Integer, db.ForeignKey('providers.provider_id'), nullable=False)
-    service_id = db.Column(db.Integer, db.ForeignKey('services.service_id'), nullable=False)
-    booking_date = db.Column(db.DateTime, nullable=False)
+class Customer(db.Model):
+    __tablename__ = 'customers'
+    customer_id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(255), nullable=False)
+    email = db.Column(db.String(255), unique=True, nullable=False)
+    phone = db.Column(db.String(20), nullable=True)
     created_at = db.Column(db.DateTime, server_default=db.func.now())
+
+class Service(db.Model):
+    __tablename__ = 'services'
+    service_id = db.Column(db.Integer, primary_key=True)
+    service_name = db.Column(db.String(255), nullable=False)
+    description = db.Column(db.Text, nullable=True)
 
 class Review(db.Model):
     __tablename__ = 'reviews'
@@ -37,8 +36,11 @@ class Review(db.Model):
     comment = db.Column(db.Text, nullable=True)
     created_at = db.Column(db.DateTime, server_default=db.func.now())
 
-class Service(db.Model):
-    __tablename__ = 'services'
-    service_id = db.Column(db.Integer, primary_key=True)
-    service_name = db.Column(db.String(255), nullable=False)
-    description = db.Column(db.Text, nullable=True)
+class Booking(db.Model):
+    __tablename__ = 'bookings'
+    booking_id = db.Column(db.Integer, primary_key=True)
+    customer_id = db.Column(db.Integer, db.ForeignKey('customers.customer_id'), nullable=False)
+    provider_id = db.Column(db.Integer, db.ForeignKey('providers.provider_id'), nullable=False)
+    service_id = db.Column(db.Integer, db.ForeignKey('services.service_id'), nullable=False)
+    booking_date = db.Column(db.DateTime, nullable=False)
+    created_at = db.Column(db.DateTime, server_default=db.func.now())
