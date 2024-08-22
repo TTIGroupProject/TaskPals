@@ -10,7 +10,7 @@ const ServicePage = () => {
   useEffect(() => {
     const fetchProviders = async () => {
       try {
-        const response = await fetch(`fetch('http://localhost:5000/api/providers?serviceId=${serviceId}`); 
+        const response = await fetch(`http://localhost:5000/api/providers?serviceId=${serviceId}`); 
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }
@@ -30,17 +30,29 @@ const ServicePage = () => {
   if (error) return <div>Error: {error}</div>;
 
   return (
-    <div className="service-page">
-      <h1>Providers for Service ID: {serviceId}</h1>
-      <div className="providers">
+    <div className="service-page container">
+      <h1 className="my-4">Providers for Service ID: {serviceId}</h1>
+      <div className="row">
         {providers.map((provider) => (
-          <div key={provider.id} className="provider-card">
-            <h2>{provider.name}</h2>
-            <img src={provider.profileImage} alt={provider.name} />
-            <p>{provider.bio}</p>
-            <h3>Specialties: {provider.specialties.join(', ')}</h3>
-            <h4>Rating: {provider.rating} ⭐</h4>
-            <button onClick={() => alert(`Contacting ${provider.name}`)}>Contact</button>
+          <div key={provider.id} className="col-md-4 mb-4">
+            <div className="card">
+              <img 
+                src={provider.profile_image || 'default_profile_image_url_here.jpg'} 
+                className="card-img-top" 
+                alt={provider.name} 
+              />
+              <div className="card-body">
+                <h5 className="card-title">{provider.name}</h5>
+                <p className="card-text">{provider.bio}</p>
+                <p className="card-text">
+                  <strong>Specialties:</strong> {provider.specialties.join(', ')}
+                </p>
+                <p className="card-text">
+                  <strong>Rating:</strong> {provider.rating} ⭐
+                </p>
+                <a href={`mailto:${provider.email}`} className="btn btn-primary">Contact</a>
+              </div>
+            </div>
           </div>
         ))}
       </div>
