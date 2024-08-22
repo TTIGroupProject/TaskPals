@@ -1,4 +1,4 @@
-from flask import Flask, jsonify
+from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 import os
 from dotenv import load_dotenv
@@ -14,33 +14,21 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
 
-# Define the Provider model
-class Provider(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(100), nullable=False)
-    profile_image = db.Column(db.String(200))
-    bio = db.Column(db.Text)
-    specialties = db.Column(db.String(200))  # Store as comma-separated values
-    rating = db.Column(db.Float)
+# Blueprints import
+from routes.customer import customer_bp
+from routes.provider import provider_bp
+from routes.review import review_bp
+from routes.service import service_bp
+
+# Register Blueprints
+app.register_blueprint(customer_bp, url_prefix='/api/customers')
+app.register_blueprint(provider_bp, url_prefix='/api/providers')
+app.register_blueprint(review_bp, url_prefix='/api/reviews')
+app.register_blueprint(service_bp, url_prefix='/api/services')
 
 # Push context manually to create tables
 with app.app_context():
     db.create_all()
-
-@app.route('/api/providers', methods=['GET'])
-def get_providers():
-    try:
-        providers = Provider.query.all()
-        return jsonify([{
-            'id': p.id,
-            'name': p.name,
-            'profile_image': p.profile_image,
-            'bio': p.bio,
-            'specialties': p.specialties.split(','),  # Convert back to a list
-            'rating': p.rating
-        } for p in providers]), 200
-    except Exception as e:
-        return jsonify({"error": str(e)}), 500
 
 if __name__ == '__main__':
     app.run(port=5000)
