@@ -107,6 +107,7 @@ function BookingForm(){
             <div className="offcanvas-body">
                 <h5 className="text-center">Chose A Day</h5>
                 <select className="form-select" aria-label="Default select example" onChange={handleDateChange}>
+                    <option>Select</option>
                         {dates.map((date, index) => {
                             return(<option key={index} value={date.toISOString()}>{getDate(date)}</option>);
                         })}
@@ -116,7 +117,7 @@ function BookingForm(){
                 <br/>
                 <h5 className="text-center">Chose A Time</h5>
                 <select className="form-select" aria-label="Default select example" onChange={handleTimeChange}>
-                        <option>Choose A Time</option>
+                        <option>Select</option>
                         {slots.map((slot, index) => {
                         return(
                             <option key={index} value={getTime(slot)}>{getTime(slot)}</option>
