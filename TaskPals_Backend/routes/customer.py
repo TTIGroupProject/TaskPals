@@ -1,22 +1,43 @@
 from flask import Blueprint, request, jsonify
 from models import db, Customer
+import bcrypt  # For password handling
 
 customer_bp = Blueprint('customer_bp', __name__)
 
 @customer_bp.route('/', methods=['POST'])
 def create_customer():
     data = request.get_json()
+    password = data.pop('password')  # Extract password field
+
+    if Customer.query.filter_by(email=data['email']).first():
+        return jsonify({"error": "Email already exists"}), 400
+
     new_customer = Customer(
         name=data['name'],
         email=data['email'],
         phone=data.get('phone')
     )
+    new_customer.set_password(password)
+
     try:
         db.session.add(new_customer)
         db.session.commit()
         return jsonify({"message": "Customer created successfully"}), 201
     except Exception as e:
         return jsonify({"error": str(e)}), 500
+
+@customer_bp.route('/login', methods=['POST'])
+def login():
+    data = request.get_json()
+    email = data['email']
+    password = data['password']
+
+    customer = Customer.query.filter_by(email=email).first()
+
+    if customer and customer.check_password(password):
+        return jsonify({"message": "Login successful"}), 200
+    else:
+        return jsonify({"error": "Invalid email or password"}), 401
 
 @customer_bp.route('/', methods=['GET'])
 def get_customers():
@@ -65,3 +86,5 @@ def delete_customer(customer_id):
         return jsonify({"message": "Customer deleted successfully"})
     except Exception as e:
         return jsonify({"error": str(e)}), 500
+    
+    
