@@ -1,6 +1,6 @@
 from flask import Blueprint, request, jsonify
 from models import db, Customer
-import bcrypt  # For password handling
+import bcrypt
 
 customer_bp = Blueprint('customer_bp', __name__)
 
