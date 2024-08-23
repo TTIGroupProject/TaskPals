@@ -12,6 +12,7 @@ ma = Marshmallow()  # Initialize Marshmallow
 
 def create_app():
     app = Flask(__name__)
+    CORS(app)
 
     # Configure the MySQL connection
     app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv("MYSQL_DATABASE_URI")

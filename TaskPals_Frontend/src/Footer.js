@@ -43,7 +43,7 @@ const Footer = () => {
                 placeholder="Enter your email"
                 required
               />
-              <button type="submit" className="btn btn-dark">
+              <button type="submit" className="btn btn-danger">
                 Subscribe
               </button>
         </form>

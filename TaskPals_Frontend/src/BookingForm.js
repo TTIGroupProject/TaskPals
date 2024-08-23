@@ -127,7 +127,7 @@ function BookingForm(){
                 <br/>
                 <span className="input-group-text">You Chose: {selectedTime}</span>
                 <br/>
-                <div className="d-grid"><button type="submit" className="btn btn-lg btn-secondary">Book</button></div>
+                <div className="d-grid"><button type="submit" className="btn btn-lg btn-danger">Book</button></div>
             </div>
             </div>
     </div>
