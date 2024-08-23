@@ -7,6 +7,8 @@ __pycache__/
 venv/
 ENV/
 
+# Ignore site-packages for venv
+/TaskPals_Backend/venv/Lib/site-packages/
 
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
@@ -31,6 +33,3 @@ ENV/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-
-
-
