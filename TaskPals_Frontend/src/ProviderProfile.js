@@ -31,17 +31,20 @@ function ProviderProfile(){
                     <Link to={`/Book`}>Book Now</Link>
                 </a>
                 </div>
-            </div>) : (<div className="d-flex justify-content-center align-items-center">
-                        <strong className="text-danger fs-1">Loading Provider Details...</strong>
-                        <div>
-                        <div class="spinner-grow text-danger m-2" role="status">
-                        </div>
-                        <div class="spinner-grow text-secondary m-2" role="status">
-                        </div>
-                        <div class="spinner-grow text-danger m-2" role="status">
-                        </div>
-                        </div>
-                    </div>)
+            </div>) : (<div>
+                <strong role="status" className="d-flex justify-content-center m-5 fs-1 font-monospace">Loading Provider Details..</strong>
+                <div className="d-flex justify-content-center">
+                        <div class="spinner-grow text-primary p-4 m-2" role="status">
+                        <span class="visually-hidden"></span>
+                      </div>
+                      <div class="spinner-grow text-secondary p-4 m-2" role="status">
+                        <span class="visually-hidden"></span>
+                      </div>
+                      <div class="spinner-grow text-info p-4 m-2" role="status">
+                        <span class="visually-hidden"></span>
+                      </div>
+                      </div>
+                      </div>)
         }
     </div>
     )
