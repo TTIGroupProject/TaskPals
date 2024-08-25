@@ -34,14 +34,14 @@ function ProviderProfile(){
             </div>) : (<div>
                 <strong role="status" className="d-flex justify-content-center m-5 fs-1 font-monospace">Loading Provider Details..</strong>
                 <div className="d-flex justify-content-center">
-                        <div class="spinner-grow text-primary p-4 m-2" role="status">
-                        <span class="visually-hidden"></span>
+                        <div className="spinner-grow text-primary p-4 m-2" role="status">
+                        <span className ="visually-hidden"></span>
                       </div>
-                      <div class="spinner-grow text-secondary p-4 m-2" role="status">
-                        <span class="visually-hidden"></span>
+                      <div className="spinner-grow text-secondary p-4 m-2" role="status">
+                        <span className="visually-hidden"></span>
                       </div>
-                      <div class="spinner-grow text-info p-4 m-2" role="status">
-                        <span class="visually-hidden"></span>
+                      <div className="spinner-grow text-info p-4 m-2" role="status">
+                        <span className="visually-hidden"></span>
                       </div>
                       </div>
                       </div>)
