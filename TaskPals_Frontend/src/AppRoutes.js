@@ -13,7 +13,7 @@ function AppRoutes() {
         <Route path="/TermsAndPrivacy" element={<Terms/>} />
         <Route path="/DoNotSellMyInfo" element={<DoNotSellMyInfoPage/>} />
         <Route path="/Legal" element={<Legal/>} />
-        <Route path="/" element={<AboutUs/>}/>
+        <Route path="/Aboutus" element={<AboutUs/>}/>
         <Route path="/apply" element={<FormProvider/>}/>
       </Routes>
     </Router>
