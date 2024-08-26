@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Container, Row, Col, Card, Form, Button } from 'react-bootstrap';
+import { Container, Row, Col, Card, Form, Button, Alert } from 'react-bootstrap';
 
 const SignupForm = () => {
     const [formData, setFormData] = useState({
@@ -8,23 +8,41 @@ const SignupForm = () => {
         email: '',
         jobApplyingFor: '',
         experience: '',
+        bio: '',
+        profilePicture: null,
     });
 
     const [submitted, setSubmitted] = useState(false);
+    const [profilePictureUrl, setProfilePictureUrl] = useState('');
 
     const handleChange = (e) => {
-        const { name, value } = e.target;
-        setFormData({
-            ...formData,
-            [name]: value
-        });
+        const { name, value, type, files } = e.target;
+        if (type === 'file') {
+            const file = files[0];
+            setFormData({
+                ...formData,
+                [name]: file
+            });
+            if (file) {
+                const reader = new FileReader();
+                reader.onloadend = () => {
+                    setProfilePictureUrl(reader.result);
+                };
+                reader.readAsDataURL(file);
+            }
+        } else {
+            setFormData({
+                ...formData,
+                [name]: value
+            });
+        }
     };
 
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        const { firstName, lastName, email, jobApplyingFor, experience } = formData;
-        if (!firstName || !lastName || !email || !jobApplyingFor || !experience) {
+        const { firstName, lastName, email, jobApplyingFor, experience, bio } = formData;
+        if (!firstName || !lastName || !email || !jobApplyingFor || !experience || !bio) {
             alert('All fields are required!');
             return;
         }
@@ -41,7 +59,7 @@ const SignupForm = () => {
                     <Col md={6}>
                         <Card>
                             <Card.Body className="text-center">
-                                <h2>Thank you for signing up with TaskPals! We will send you an email shortly with the jobs availible.</h2>
+                                <h2>Thank you for signing up with TaskPals! We will send you an email shortly with the jobs available.</h2>
                             </Card.Body>
                         </Card>
                     </Col>
@@ -115,6 +133,34 @@ const SignupForm = () => {
                                         onChange={handleChange}
                                         required
                                     />
+                                </Form.Group>
+                                <Form.Group controlId="bio" className="mb-3">
+                                    <Form.Label>Bio:</Form.Label>
+                                    <Form.Control
+                                        as="textarea"
+                                        name="bio"
+                                        value={formData.bio}
+                                        onChange={handleChange}
+                                        rows={3}
+                                        required
+                                    />
+                                </Form.Group>
+                                <Form.Group controlId="profilePicture" className="mb-3">
+                                    <Form.Label>Profile Picture:</Form.Label>
+                                    <Form.Control
+                                        type="file"
+                                        name="profilePicture"
+                                        accept="image/*"
+                                        onChange={handleChange}
+                                    />
+                                    {profilePictureUrl && (
+                                        <img
+                                            src={profilePictureUrl}
+                                            alt="Profile Preview"
+                                            className="img-fluid mt-3"
+                                            style={{ maxWidth: '200px' }}
+                                        />
+                                    )}
                                 </Form.Group>
                                 <Button type="submit" variant="primary" className="w-100">
                                     Sign Up
