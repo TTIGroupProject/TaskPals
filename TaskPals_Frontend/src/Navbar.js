@@ -7,7 +7,7 @@ const Navbar = () => {
           <div className="container-fluid">
             <a className="navbar-brand" href="/">
               <img 
-                src="path-to-your-logo.png" 
+                src="taskpals_logo.jpg" 
                 alt="Logo" 
                 className="navbarheight"
               />
