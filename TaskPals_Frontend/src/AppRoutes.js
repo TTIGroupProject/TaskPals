@@ -8,7 +8,7 @@ import ServicePage from "./ServicePage";
 import Auth from "./Auth";
 import CustomerProfile from "./CustomerProfile";
 
-function AppRoutes(isLoggedIn) {
+function AppRoutes({ isLoggedIn }) { // Accept isLoggedIn as a prop
   return (
         <Router>
           <Routes>
