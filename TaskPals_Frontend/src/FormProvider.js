@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Container, Row, Col, Card, Form, Button } from 'react-bootstrap';
-import WebcamCapture from './WebcamCapture';
+import WebcamCapture from './WebcamCapture.js';
 
 const SignupForm = () => {
   const [formData, setFormData] = useState({
