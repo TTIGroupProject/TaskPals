@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Container, Row, Col, Card, Form, Button } from 'react-bootstrap';
 import WebcamCapture from './WebcamCapture.js';
+import axios from 'axios';
 
 const SignupForm = () => {
   const [formData, setFormData] = useState({
@@ -42,18 +43,37 @@ const SignupForm = () => {
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const { firstName, lastName, email, phoneNumber, jobApplyingFor, experience, bio } = formData;
+    const { firstName, lastName, email, phoneNumber, jobApplyingFor, experience, bio, profilePicture } = formData;
     if (!firstName || !lastName || !email || !phoneNumber || !jobApplyingFor || !experience || !bio) {
       alert('All fields are required!');
       return;
     }
 
-    console.log('Signup data:', formData);
+    const form = new FormData();
+    form.append('firstName', firstName);
+    form.append('lastName', lastName);
+    form.append('email', email);
+    form.append('phoneNumber', phoneNumber);
+    form.append('jobApplyingFor', jobApplyingFor);
+    form.append('experience', experience);
+    form.append('bio', bio);
+    if (profilePicture) {
+      form.append('profilePicture', profilePicture);
+    }
 
-    setSubmitted(true);
+    try {
+      await axios.post('http://localhost:5000/api/providers', form, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      });
+      setSubmitted(true);
+    } catch (error) {
+      console.error('Error submitting form:', error);
+    }
   };
 
   const handleCameraOptionChange = (e) => {

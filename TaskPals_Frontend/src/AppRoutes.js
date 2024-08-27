@@ -8,6 +8,8 @@ import ServicePage from "./ServicePage";
 import Auth from "./Auth";
 import CustomerProfile from "./CustomerProfile";
 import BookingForm from "./BookingForm";
+import AboutUs from "./AboutUs"
+import FormProvider from "./FormProvider"
 
 function AppRoutes({ isLoggedIn }) { // Accept isLoggedIn as a prop
   return (
