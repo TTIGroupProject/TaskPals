@@ -1,5 +1,7 @@
 import React from "react";
 import './Navbar.css'
+// import FormProviderService from './FormProviderservice';
+
 
 const Navbar = () => {
   return(
@@ -18,10 +20,10 @@ const Navbar = () => {
             <div className="collapse navbar-collapse" id="navbarNav">
               <ul className="navbar-nav ms-auto">
                 <li className="nav-item">
-                  <a className="nav-link text-decoration-underline" href="#">Sign in</a>
+                  <a className="nav-link text-decoration-underline" href="/login">Sign in</a>
                 </li>
                 <li className="nav-item">
-                  <a className="nav-link text-decoration-underline" href="#">Become a TaskPal</a>
+                  <a className="nav-link text-decoration-underline" href='/apply'>Become a TaskPal</a>
                 </li>
               </ul>
             </div>

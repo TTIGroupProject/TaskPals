@@ -86,7 +86,7 @@ const HomePage = () => {
           {selectedService || 'What do you need done?'}
         </button>
           <ul className='dropdown-menu' aria-labelledby="dropdownMenuButton">
-              <li><a href="#" className="dropdown-item d-flex justify-content-between align-items-center" onClick={() => setSelectedService('Cleaning', <img src= {cleaning} alt='cleaning supplies'/>)}>Cleaning<img src= {cleaning} alt='cleaning supplies'/></a></li>
+              <li><a href="#" className="dropdown-item d-flex justify-content-between align-items-center" onClick={() => setSelectedService('Cleaning', cleaning)}>Cleaning<img src= {cleaning} alt='cleaning supplies'/></a></li>
               <li><a href="#" className="dropdown-item d-flex justify-content-between align-items-center" onClick={() => setSelectedService('Landscaping',)}>Landscaping<img src={landscaping} alt='garden tools'/></a></li>
               <li><a href="#" className="dropdown-item d-flex justify-content-between align-items-center" onClick={() => setSelectedService('Plumbing',)}>Plumbing<img src={plumbing} alt='plumbing supplies'/></a></li>
               <li><a href="#" className="dropdown-item d-flex justify-content-between align-items-center" onClick={() => setSelectedService('Exterminator')}>Exterminator<img src={exterminator} alt='bug'/></a></li>
