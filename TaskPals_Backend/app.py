@@ -1,6 +1,7 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_jwt_extended import JWTManager  # Import the JWT Manager
+from flask_cors import CORS  # Import CORS for handling cross-origin requests
 import os
 from dotenv import load_dotenv
 
@@ -17,11 +18,16 @@ def create_app():
     app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv("MYSQL_DATABASE_URI")
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     app.config['JWT_SECRET_KEY'] = os.getenv("JWT_SECRET_KEY")  # Add your JWT secret key
+    app.config['UPLOAD_FOLDER'] = os.getenv("UPLOAD_FOLDER")  # Add folder for file uploads
+    app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024  # 16 MB max file size
 
     db.init_app(app)
 
     # Initialize JWT
     jwt = JWTManager(app)
+
+    # Initialize CORS
+    CORS(app, resources={r"/*": {"origins": "*"}})  # Allow all origins for development
 
     # Imports for blueprints
     from routes.customer import customer_bp
