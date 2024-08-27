@@ -86,14 +86,14 @@ const HomePage = () => {
           {selectedService || 'What do you need done?'}
         </button>
           <ul className='dropdown-menu' aria-labelledby="dropdownMenuButton">
-              <li><a href="#" className="dropdown-item d-flex justify-content-between align-items-center" onClick={() => setSelectedService('Cleaning', cleaning)}>Cleaning<img src= {cleaning} alt='cleaning supplies'/></a></li>
-              <li><a href="#" className="dropdown-item d-flex justify-content-between align-items-center" onClick={() => setSelectedService('Landscaping',)}>Landscaping<img src={landscaping} alt='garden tools'/></a></li>
-              <li><a href="#" className="dropdown-item d-flex justify-content-between align-items-center" onClick={() => setSelectedService('Plumbing',)}>Plumbing<img src={plumbing} alt='plumbing supplies'/></a></li>
+              <li><a href="#" className="dropdown-item d-flex justify-content-between align-items-center" onClick={() => setSelectedService('Cleaning')}>Cleaning<img src= {cleaning} alt='cleaning supplies'/></a></li>
+              <li><a href="#" className="dropdown-item d-flex justify-content-between align-items-center" onClick={() => setSelectedService('Landscaping')}>Landscaping<img src={landscaping} alt='garden tools'/></a></li>
+              <li><a href="#" className="dropdown-item d-flex justify-content-between align-items-center" onClick={() => setSelectedService('Plumbing')}>Plumbing<img src={plumbing} alt='plumbing supplies'/></a></li>
               <li><a href="#" className="dropdown-item d-flex justify-content-between align-items-center" onClick={() => setSelectedService('Exterminator')}>Exterminator<img src={exterminator} alt='bug'/></a></li>
-              <li><a href="#" className="dropdown-item d-flex justify-content-between align-items-center" onClick={() => setSelectedService('Handy Man',)}>Handy Man<img src={handyman} alt='drill'/></a></li>
-              <li><a href="#" className="dropdown-item d-flex justify-content-between align-items-center" onClick={() => setSelectedService('Moving',)}>Moving<img src={moving} alt='moving truck'/></a></li>
-              <li><a href="#" className="dropdown-item d-flex justify-content-between align-items-center" onClick={() => setSelectedService('Electrical work',)}>Electrical Work<img src={electricalWork} alt='electrical supplies'/></a></li>
-              <li><a href="#" className="dropdown-item d-flex justify-content-between align-items-center" onClick={() => setSelectedService('painting',)}> Painting<img src={painting} alt='paint supplies'/></a></li>
+              <li><a href="#" className="dropdown-item d-flex justify-content-between align-items-center" onClick={() => setSelectedService('Handy Man')}>Handy Man<img src={handyman} alt='drill'/></a></li>
+              <li><a href="#" className="dropdown-item d-flex justify-content-between align-items-center" onClick={() => setSelectedService('Moving')}>Moving<img src={moving} alt='moving truck'/></a></li>
+              <li><a href="#" className="dropdown-item d-flex justify-content-between align-items-center" onClick={() => setSelectedService('Electrical work')}>Electrical Work<img src={electricalWork} alt='electrical supplies'/></a></li>
+              <li><a href="#" className="dropdown-item d-flex justify-content-between align-items-center" onClick={() => setSelectedService('painting')}> Painting<img src={painting} alt='paint supplies'/></a></li>
               </ul>
             </div>
           </div>
@@ -137,7 +137,7 @@ const HomePage = () => {
       </div>
     </div>
     <div className='container mt-5'>
-      <h2 className='text-center mb-4'>What our customers are saying</h2>
+      <h2 className='text-center mb-4'>Hear from our happy customers</h2>
       <div className='row'>
         {topReviews.map((review, index) => (
           <div key={index} className='col-md-4 mb-4'>

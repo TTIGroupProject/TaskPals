@@ -10,6 +10,8 @@ import CustomerProfile from "./CustomerProfile";
 import BookingForm from "./BookingForm";
 import AboutUs from "./AboutUs"
 import FormProvider from "./FormProvider"
+import ContactUs from './ContactUs'
+import Reviews from './Reviews'
 
 function AppRoutes({ isLoggedIn }) { // Accept isLoggedIn as a prop
   return (
@@ -22,6 +24,7 @@ function AppRoutes({ isLoggedIn }) { // Accept isLoggedIn as a prop
         <Route path="/AboutUs" element={<AboutUs/>}/>
         <Route path="/apply" element={<FormProvider/>}/>
         <Route path='/ContactUs' element={<ContactUs/>}/>
+        <Route path='/reviews' element={<Reviews/>}/>
         <Route path="/login" element={isLoggedIn? <Navigate to = '/profile'/> : <Auth/>}/>
         <Route path="/service/:serviceId" element={<ServicePage/>}/> 
         <Route path="/Book" element={<BookingForm/>}/>

@@ -4,7 +4,7 @@ import './Notices.css';
 const Legal = () => {
   return (
     <div className="padding">
-      <h2>Terms of Service</h2>
+      <h2 className="text-center">Terms of Service</h2>
       <h4>Effective Date: August 22, 2024</h4>
       
       <p>Welcome to TaskPals ("we," "our," "us"). By accessing or using our website [taskpals.com] (the "Site"), you agree to be bound by the following Terms of Service ("Terms"). Please read them carefully.</p>

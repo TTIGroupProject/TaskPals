@@ -1,5 +1,6 @@
 import React from 'react';
 
+
 const StarRating = ({rating}) => {
   const maxRating = 5;
   const stars = [];
@@ -9,7 +10,7 @@ const StarRating = ({rating}) => {
       <i 
         key={i}
         className={`bi bi-star${i <= rating ? '-fill' : ''}`}
-        style={{ color: i <= rating ? 'gold' : 'lightgray' }}
+        style={{ color: i <= rating ? 'black' : 'lightgray' }}
         ></i>
     );
   }

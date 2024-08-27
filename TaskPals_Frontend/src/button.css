@@ -1,0 +1,53 @@
+.caveat-font {
+  font-family: 'Caveat', sans-serif;
+}
+
+.no-top-padding {
+  padding-top: 0 !important;
+}
+
+.text-pink {
+  color: rgb(245, 91, 116);
+}
+
+.btn-pink {
+  background-color: rgb(245, 91, 116);
+  border-color: rgb(245, 91, 116);
+}
+
+.btn-pink:hover {
+  background-color: rgb(225, 71, 96); /* Slightly darker pink for hover */
+  border-color: rgb(225, 71, 96);
+}
+
+.btn-link {
+  color: gray;
+}
+.btn-link:hover {
+  color: black;
+}
+
+.container-center {
+  display: flex;
+  justify-content: center; /* Horizontally center */ 
+  padding-bottom: 10px;
+}
+
+.mt-3 {
+  margin-top: 1rem;
+}
+
+.mt-4 {
+  margin-top: 1.5rem;
+}
+
+.form-control {
+  margin-bottom: 1rem;
+}
+.btn-dark {
+  height: 40px; /* Adjust height as needed */
+  line-height: 40px; /* Vertically center text */
+  padding: 0 15px; /* Adjust padding to avoid extra height */
+  font-size: 16px; /* Adjust font size if needed */
+  border-radius: 4px; /* Optional: for rounded corners */
+}

@@ -1,70 +1,104 @@
 import React from 'react';
-import { Container, Row, Col, Card, Button } from 'react-bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './button.css'; // Assuming you have custom styles in this file
+import { FaSearch, FaLink, FaCalendarAlt, FaSmileBeam, FaShieldAlt } from 'react-icons/fa';
 
 const AboutUs = () => {
-    return (
-        <Container className="mt-5">
-            <Row className="justify-content-center">
-                <Col md={8}>
-                    <Card className="mb-4">
-                        <Card.Body>
-                            <Card.Title className="text-center mb-4">About TaskPals</Card.Title>
-                            <Card.Text>
-                                Welcome to TaskPals, your go-to platform for finding reliable home services and job opportunities in your area. At TaskPals, we understand the need for trustworthy and efficient help for your home needs, whether it's fixing a leaky faucet, electrical work, cleaning, gardening, or any other home service.
+  return (
+    <div className="container my-5 no-top-padding">
+      <header className="text-center mb-4">
+        <h1 className="display-4 caveat-font mb-3">About Us</h1>
+        <p className="lead text-muted">
+          Welcome to TaskPals – Get Hired, Get Help – All in a Click!
+        </p>
+      </header>
 
-                                We connect you with local professionals who can assist you with various tasks. Our service providers are vetted for quality and reliability, ensuring that you receive top-notch assistance for your home needs.
+      <section className="mb-5">
+        <h2 className="display-5 caveat-font mb-4">Who We Are</h2>
+        <div className="card shadow-sm">
+          <div className="card-body">
+            <p>
+              TaskPals is more than just a service – it’s a vibrant community where dedicated professionals and valued clients come together to create a hassle-free home environment. We meticulously vet and select our helpers to ensure they are trustworthy, skilled, and committed to delivering exceptional service. Our team is passionate about making your everyday tasks less daunting, so you can focus on what truly matters to you.
+            </p>
+            <p>
+              But that’s not all – TaskPals also offers exciting job opportunities for skilled professionals looking to join our network. Whether you’re a handyman, electrician, plumber, or another service provider, we invite you to apply and become part of our trusted team. We’re always on the lookout for talented individuals who are enthusiastic about providing top-notch service and making a difference in our clients' lives.
+            </p>
+          </div>
+        </div>
+      </section>
 
-                                Additionally, TaskPals offers job opportunities for skilled professionals seeking to join our network. If you are a handyman, electrician, plumber, or any other service provider, you can apply to become part of our trusted team. We are always looking for talented individuals who are passionate about providing excellent service.
-                            </Card.Text>
-                        </Card.Body>
-                    </Card>
-                    <Card>
-                        <Card.Body>
-                            <Card.Title className="text-center mb-4">Find Services or Apply for a Job</Card.Title>
-                            <Row>
-                                <Col md={6} className="mb-3">
-                                    <Card className="text-center">
-                                        <Card.Body>
-                                            <Card.Title>Looking for Home Services?</Card.Title>
-                                            <Card.Text>
-                                                Explore our range of services and connect with trusted professionals to get the help you need at home.
-                                            </Card.Text>
-                                            <Button href="/services" variant="primary">Find Services</Button>
-                                        </Card.Body>
-                                    </Card>
-                                </Col>
-                                <Col md={6} className="mb-3">
-                                    <Card className="text-center">
-                                        <Card.Body>
-                                            <Card.Title>Apply for a Job</Card.Title>
-                                            <Card.Text>
-                                                Join our team of professionals and start offering your services to clients in need. Apply now to become a part of TaskPals.
-                                            </Card.Text>
-                                            <Button href="/apply" variant="primary">Apply Now</Button>
-                                        </Card.Body>
-                                    </Card>
-                                </Col>
-                            </Row>
-                        </Card.Body>
-                    </Card>
-                </Col>
-            </Row>
-            <Row className="justify-content-center">
-                <Col md={8}>
-                    <Card className="text-center mt-4" style={{ backgroundColor: '#f8f9fa' }}>
-                        <Card.Body>
-                            <Card.Title>Contact Us</Card.Title>
-                            <Card.Text>
-                                <p>Phone: (123) 456-7890</p>
-                                <p>Email: contact@taskpals.com</p>
-                                <p>Hours: Mon-Fri 9:00 AM - 5:00 PM</p>
-                            </Card.Text>
-                        </Card.Body>
-                    </Card>
-                </Col>
-            </Row>
-        </Container>
-    );
+      <section className="mb-5">
+        <h2 className="display-5 caveat-font mb-4">What We Do</h2>
+        <div className="row">
+          <div className="col-md-6 mb-4">
+            <div className="card shadow-sm">
+              <div className="card-body text-center">
+                <FaSearch size={40} style={{ color: 'rgb(245, 91, 116)' }} className="mb-3" />
+                <h4 className="card-title">Browse</h4>
+                <p className="card-text">Explore our wide range of services and find the perfect helper for your needs.</p>
+              </div>
+            </div>
+          </div>
+          <div className="col-md-6 mb-4">
+            <div className="card shadow-sm">
+              <div className="card-body text-center">
+                <FaLink size={40} style={{ color: 'rgb(245, 91, 116)' }} className="mb-3" />
+                <h4 className="card-title">Connect</h4>
+                <p className="card-text">Use our easy-to-navigate platform to communicate directly with potential helpers.</p>
+              </div>
+            </div>
+          </div>
+          <div className="col-md-6 mb-4">
+            <div className="card shadow-sm">
+              <div className="card-body text-center">
+                <FaCalendarAlt size={40} style={{ color: 'rgb(245, 91, 116)' }} className="mb-3" />
+                <h4 className="card-title">Schedule</h4>
+                <p className="card-text">Arrange a time that works best for you and your helper.</p>
+              </div>
+            </div>
+          </div>
+          <div className="col-md-6 mb-4">
+            <div className="card shadow-sm">
+              <div className="card-body text-center">
+                <FaSmileBeam size={40} style={{ color: 'rgb(245, 91, 116)' }} className="mb-3" />
+                <h4 className="card-title">Relax</h4>
+                <p className="card-text">Enjoy a clean, organized, and stress-free home!</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="mb-5 text-center">
+        <h2 className="display-5 caveat-font mb-4">Our Promise</h2>
+        <div className="card mx-auto" style={{ maxWidth: '600px' }}>
+          <div className="card-body text-center">
+            <FaShieldAlt size={40} style={{ color: 'rgb(245, 91, 116)' }} className="mb-3" />
+            <p>
+              At TaskPals, we are committed to excellence and reliability. Our team strives to exceed your expectations with every task completed. We value open communication, professionalism, and a strong work ethic, ensuring you receive the highest quality service every time.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section className="text-center mb-5">
+        <h2 className="display-5 caveat-font mb-4">Get Started</h2>
+        <p className="mb-4">
+          Ready to take the first step towards a more manageable and enjoyable home life? Join the TaskPals community today and discover how easy it is to find the right help for your household needs.
+        </p>
+        <p className="mb-4">
+          Thank you for choosing TaskPals – your trusted partner in everyday tasks!
+        </p>
+      </section>
+
+      <section id="contact" className="text-center mb-5">
+        <h2 className="display-5 caveat-font mb-4">Contact Us</h2>
+        <p>
+          Have questions or need assistance? Feel free to reach out to our friendly support team <a href="/ContactUs" className="text-primary">here</a>. We’re here to help!
+        </p>
+      </section>
+    </div>
+  );
 };
 
 export default AboutUs;
