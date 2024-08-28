@@ -10,6 +10,7 @@ ENV/
 # Ignore site-packages for venv
 /TaskPals_Backend/venv/Lib/site-packages/
 /TaskPals_Backend/venv
+/TaskPals_Backend/__pycache__
 
 
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
