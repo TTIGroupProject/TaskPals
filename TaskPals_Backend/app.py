@@ -1,14 +1,13 @@
 from flask import Flask
-from flask_sqlalchemy import SQLAlchemy
 from flask_jwt_extended import JWTManager
 from flask_cors import CORS
 from flask_marshmallow import Marshmallow  # Import Flask-Marshmallow
 import os
 from dotenv import load_dotenv
+from models import db
 
 load_dotenv()
 
-db = SQLAlchemy()
 ma = Marshmallow()  # Initialize Marshmallow
 
 def create_app():
