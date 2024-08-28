@@ -44,16 +44,16 @@ class Provider(db.Model):
     profilePicture = db.Column(db.String(255), nullable=True)
     created_at = db.Column(db.DateTime, server_default=db.func.now())
 
-def __init__(self, firstName: str, lastName: str, email: str, phoneNumber: str, jobApplyingFor: str,
-experience: int, bio: str, profilePicture: Optional[str] = None) -> None:
-    self.firstName = firstName
-    self.lastName = lastName
-    self.email = email
-    self.phoneNumber = phoneNumber
-    self.jobApplyingFor = jobApplyingFor
-    self.experience = experience
-    self.bio = bio
-    self.profilePicture = profilePicture
+    def __init__(self, firstName: str, lastName: str, email: str, phoneNumber: str, jobApplyingFor: str,
+    experience: int, bio: str, profilePicture: Optional[str] = None) -> None:
+        self.firstName = firstName
+        self.lastName = lastName
+        self.email = email
+        self.phoneNumber = phoneNumber
+        self.jobApplyingFor = jobApplyingFor
+        self.experience = experience
+        self.bio = bio
+        self.profilePicture = profilePicture
 
 class Service(db.Model):
     __tablename__ = 'services'

@@ -12,10 +12,9 @@ service_bp = Blueprint('service_bp', __name__)
 booking_bp = Blueprint('booking_bp', __name__)
 
 UPLOAD_FOLDER = 'uploads/'
-ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
 
 def allowed_file(filename):
-    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+    return '.' in filename and filename.rsplit('.', 1)[1].lower()
 
 if not os.path.exists(UPLOAD_FOLDER):
     os.makedirs(UPLOAD_FOLDER)
@@ -194,12 +193,14 @@ def create_provider():
         return jsonify({"error": "Request payload is empty"}), 400
 
     new_provider = Provider(
-        name=data.get('name'),
+        firstName=data.get('firstName'),
+        lastName=data.get('lastName'),
         email=data.get('email'),
-        profile_image=data.get('profile_image'),
+        phoneNumber=data.get('phoneNumber'),
+        jobApplyingFor=data.get('jobApplyingFor'),
+        experience=data.get('experience'),
         bio=data.get('bio'),
-        specialties=data.get('specialties'),
-        rating=data.get('rating')
+        profilePicture=data.get('profilePicture')
     )
 
     try:
@@ -216,12 +217,14 @@ def get_providers():
         providers = Provider.query.all()
         return jsonify([{
             'provider_id': p.provider_id,
-            'name': p.name,
+            'firstName': p.firstName,
+            'lastName': p.lastName,
             'email': p.email,
-            'profile_image': p.profile_image,
+            'phoneNumber': p.phoneNumber,
+            'jobApplyingFor': p.jobApplyingFor,
+            'experience': p.experience,
             'bio': p.bio,
-            'specialties': p.specialties,
-            'rating': p.rating,
+            'profilePicture': p.profilePicture,
             'created_at': p.created_at
         } for p in providers]), 200
     except Exception as e:
@@ -233,12 +236,14 @@ def get_provider(provider_id):
     provider = Provider.query.get_or_404(provider_id)
     return jsonify({
         'provider_id': provider.provider_id,
-        'name': provider.name,
+        'firstName': provider.firstName,
+        'lastName': provider.lastName,
         'email': provider.email,
-        'profile_image': provider.profile_image,
+        'phoneNumber': provider.phoneNumber,
+        'jobApplyingFor': provider.jobApplyingFor,
+        'experience': provider.experience,
         'bio': provider.bio,
-        'specialties': provider.specialties,
-        'rating': provider.rating,
+        'profilePicture': provider.profilePicture,
         'created_at': provider.created_at
     }), 200
 
@@ -248,7 +253,7 @@ def update_provider(provider_id):
     provider = Provider.query.get_or_404(provider_id)
 
     # Handle file upload
-    profile_image_file = request.files.get('profile_image')
+    profile_image_file = request.files.get('profilePicture')
     if profile_image_file and allowed_file(profile_image_file.filename):
         filename = profile_image_file.filename  # Storing it temporarily
         if filename:  # Check that filename is not None or empty
@@ -262,12 +267,16 @@ def update_provider(provider_id):
 
     if not data:
         return jsonify({"error": "Request payload is empty"}), 400
-
-    provider.name = data.get('name', provider.name)
+    
+    provider.firstName = data.get('firstName', provider.firstName)
+    provider.lastName = data.get('lastName', provider.lastName)
     provider.email = data.get('email', provider.email)
+    provider.phoneNumber = data.get('phoneNumber', provider.phoneNumber)
+    provider.jobApplyingFor = data.get('jobApplyingFor', provider.jobApplyingFor)
+    provider.experience = data.get('experience', provider.experience)
     provider.bio = data.get('bio', provider.bio)
-    provider.specialties = data.get('specialties', provider.specialties)
-    provider.rating = data.get('rating', provider.rating)
+    provider.profilePicture = data.get('profilePicture', provider.profilePicture)
+    
 
     try:
         db.session.commit()
