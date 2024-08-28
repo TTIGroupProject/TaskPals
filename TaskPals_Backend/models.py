@@ -34,23 +34,26 @@ class Customer(db.Model):
 class Provider(db.Model):
     __tablename__ = 'providers'
     provider_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    name = db.Column(db.String(255), nullable=False)
+    firstName = db.Column(db.String(255), nullable=False)
+    lastName = db.Column(db.String(255), nullable=False)
     email = db.Column(db.String(255), unique=True, nullable=False)
-    profile_image = db.Column(db.String(255), nullable=True)
-    bio = db.Column(db.Text, nullable=True)
-    specialties = db.Column(db.String(255), nullable=True)
-    rating = db.Column(db.Float, nullable=True)
+    phoneNumber = db.Column(db.String(255), nullable=False)
+    jobApplyingFor = db.Column(db.String(255), nullable=False)
+    experience = db.Column(db.Integer, nullable=False)
+    bio = db.Column(db.Text, nullable=False)
+    profilePicture = db.Column(db.String(255), nullable=True)
     created_at = db.Column(db.DateTime, server_default=db.func.now())
 
-    def __init__(self, name: str, email: str, profile_image: Optional[str] = None, 
-                 bio: Optional[str] = None, specialties: Optional[str] = None, 
-                 rating: Optional[float] = None) -> None:
-        self.name = name
-        self.email = email
-        self.profile_image = profile_image
-        self.bio = bio
-        self.specialties = specialties
-        self.rating = rating
+def __init__(self, firstName: str, lastName: str, email: str, phoneNumber: str, jobApplyingFor: str,
+experience: int, bio: str, profilePicture: Optional[str] = None) -> None:
+    self.firstName = firstName
+    self.lastName = lastName
+    self.email = email
+    self.phoneNumber = phoneNumber
+    self.jobApplyingFor = jobApplyingFor
+    self.experience = experience
+    self.bio = bio
+    self.profilePicture = profilePicture
 
 class Service(db.Model):
     __tablename__ = 'services'
