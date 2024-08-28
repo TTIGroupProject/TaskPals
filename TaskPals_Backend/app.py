@@ -5,6 +5,8 @@ from flask_marshmallow import Marshmallow  # Import Flask-Marshmallow
 import os
 from dotenv import load_dotenv
 from models import db
+import pyodbc
+from env import connection
 
 load_dotenv()
 
@@ -45,3 +47,10 @@ if __name__ == '__main__':
     with app.app_context():
         db.create_all()  # Creates database tables based on the defined models
     app.run(port=5000)
+    
+try: 
+    conn = pyodbc.connect(connection) 
+    print("Connection successful!") 
+except Exception as e: 
+    print(f"Connection failed: {e}") 
+finally: conn.close()
