@@ -11,7 +11,7 @@ const ServicePage = () => {
   useEffect(() => {
     const fetchProviders = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/api/providers`, {
+        const response = await axios.get(`http://localhost:5000/api/provider`, {
           params: { serviceId }
         });
         setProviders(response.data);

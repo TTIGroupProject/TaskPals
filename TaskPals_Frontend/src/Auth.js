@@ -12,7 +12,7 @@ const Auth = () => {
 
     const handleLogin = async (event) => {
         event.preventDefault();
-        const response = await fetch('http://localhost:5000/api/customers/login', {
+        const response = await fetch('http://localhost:5000/api/customer/login', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -32,7 +32,7 @@ const Auth = () => {
 
     const handleRegister = async (event) => {
         event.preventDefault();
-        const response = await fetch('http://localhost:5000/api/customers/register', {
+        const response = await fetch('http://localhost:5000/api/customer/register', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
