@@ -14,7 +14,7 @@ const CustomerProfile = () => {
     }, []);
 
     const fetchCustomerData = async () => {
-        const response = await fetch('http://localhost:5000/api/customers/profile'); 
+        const response = await fetch('http://localhost:5000/api/customer/profile'); 
         const data = await response.json();
         setCustomer(data);
         setName(data.name);
@@ -23,14 +23,14 @@ const CustomerProfile = () => {
     };
 
     const fetchPastOrders = async () => {
-        const response = await fetch('http://localhost:5000/api/customers/orders'); // 
+        const response = await fetch('http://localhost:5000/api/customer/orders'); // 
         const data = await response.json();
         setOrders(data);
     };
 
     const handleProfileUpdate = async (event) => {
         event.preventDefault();
-        const response = await fetch('http://localhost:5000/api/customers/profile', {
+        const response = await fetch('http://localhost:5000/api/customer/profile', {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
