@@ -16,11 +16,15 @@ booking_bp = Blueprint('booking_bp', __name__)
 @customer_bp.route('/', methods=['POST'])
 def create_customer():
     data = request.get_json()
+
     if data is None:
         return jsonify({"error": "Request payload is empty"}), 400
-    password = data.pop('password')  # Extract password field
+
+    password = data.pop('password', None) 
+
     if not password:
         return jsonify({"error": "Password is required"}), 400
+
     if not data.get('email') or not data.get('name'):
         return jsonify({"error": "Email and Name are required"}), 400
 
