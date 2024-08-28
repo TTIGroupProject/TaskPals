@@ -11,16 +11,24 @@ review_bp = Blueprint('review_bp', __name__)
 service_bp = Blueprint('service_bp', __name__)
 booking_bp = Blueprint('booking_bp', __name__)
 
+UPLOAD_FOLDER = 'uploads/'
+ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
+
+def allowed_file(filename):
+    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
+if not os.path.exists(UPLOAD_FOLDER):
+    os.makedirs(UPLOAD_FOLDER)
 
 # Route to Create a New Customer
 @customer_bp.route('/', methods=['POST'])
 def create_customer():
     data = request.get_json()
 
-    if data is None:
+    if not data:
         return jsonify({"error": "Request payload is empty"}), 400
 
-    password = data.pop('password', None) 
+    password = data.pop('password', None)
 
     if not password:
         return jsonify({"error": "Password is required"}), 400
@@ -49,7 +57,7 @@ def create_customer():
 def login():
     data = request.get_json()
 
-    if data is None:
+    if not data:
         return jsonify({"error": "Request payload is empty"}), 400
 
     email = data.get('email')
@@ -64,7 +72,7 @@ def login():
         return jsonify({"message": "Login successful"}), 200
     else:
         return jsonify({"error": "Invalid email or password"}), 401
-    
+
 # Route to Fetch All Customers
 @customer_bp.route('/', methods=['GET'])
 def get_customers():
@@ -97,9 +105,14 @@ def get_customer(customer_id):
 def update_customer(customer_id):
     customer = Customer.query.get_or_404(customer_id)
     data = request.get_json()
+
+    if not data:
+        return jsonify({"error": "Request payload is empty"}), 400
+
     customer.name = data.get('name', customer.name)
     customer.email = data.get('email', customer.email)
     customer.phone = data.get('phone', customer.phone)
+
     try:
         db.session.commit()
         return jsonify({"message": "Customer updated successfully"})
@@ -145,6 +158,10 @@ def update_customer_profile():
         return jsonify({"message": "Customer not found"}), 404
 
     data = request.json
+
+    if not data:
+        return jsonify({"error": "Request payload is empty"}), 400
+
     customer.name = data.get('name', customer.name)
     customer.email = data.get('email', customer.email)
     customer.phone = data.get('phone', customer.phone)
@@ -161,34 +178,30 @@ def get_customer_orders():
 
     order_list = [{
         "id": order.booking_id,
-        "service_name": order.service_id,  # You might want to join with Service table for detailed info 
+        "service_name": order.service_id,  
         "booking_date": order.booking_date,
-        "status": "Pending",  # Or adjust based on your logic
+        "status": "Pending", 
     } for order in orders]
 
     return jsonify(order_list), 200
 
-
 # Route to Create a New Provider
-# Configuration for file uploads
-UPLOAD_FOLDER = 'uploads/'  # Ensure this folder exists
-ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
-
-def allowed_file(filename):
-    return '.' in filename and \
-           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
-
 @provider_bp.route('/', methods=['POST'])
 def create_provider():
     data = request.get_json()
+
+    if not data:
+        return jsonify({"error": "Request payload is empty"}), 400
+
     new_provider = Provider(
-        name=data['name'],
-        email=data['email'],
+        name=data.get('name'),
+        email=data.get('email'),
         profile_image=data.get('profile_image'),
         bio=data.get('bio'),
         specialties=data.get('specialties'),
         rating=data.get('rating')
     )
+
     try:
         db.session.add(new_provider)
         db.session.commit()
@@ -196,6 +209,7 @@ def create_provider():
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
+# Route to Fetch All Providers
 @provider_bp.route('/', methods=['GET'])
 def get_providers():
     try:
@@ -213,6 +227,7 @@ def get_providers():
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
+# Route to Fetch a Single Provider by ID
 @provider_bp.route('/<int:provider_id>', methods=['GET'])
 def get_provider(provider_id):
     provider = Provider.query.get_or_404(provider_id)
@@ -225,51 +240,60 @@ def get_provider(provider_id):
         'specialties': provider.specialties,
         'rating': provider.rating,
         'created_at': provider.created_at
-    })
+    }), 200
 
+# Route to Update Provider Information
 @provider_bp.route('/<int:provider_id>', methods=['PUT'])
 def update_provider(provider_id):
     provider = Provider.query.get_or_404(provider_id)
-    
+
     # Handle file upload
-    if 'profile_image' in request.files:
-        file = request.files['profile_image']
-        if file and allowed_file(file.filename):
-            filename = secure_filename(file.filename)
+    profile_image_file = request.files.get('profile_image')
+    if profile_image_file and allowed_file(profile_image_file.filename):
+        filename = profile_image_file.filename  # Storing it temporarily
+        if filename:  # Check that filename is not None or empty
+            filename = secure_filename(filename)
             file_path = os.path.join(UPLOAD_FOLDER, filename)
-            file.save(file_path)
+            profile_image_file.save(file_path)
             provider.profile_image = filename
 
     # Handle JSON data
-    data = request.form.to_dict()
+    data = request.get_json()
+
+    if not data:
+        return jsonify({"error": "Request payload is empty"}), 400
+
     provider.name = data.get('name', provider.name)
     provider.email = data.get('email', provider.email)
     provider.bio = data.get('bio', provider.bio)
     provider.specialties = data.get('specialties', provider.specialties)
     provider.rating = data.get('rating', provider.rating)
-    
+
     try:
         db.session.commit()
-        return jsonify({"message": "Provider updated successfully"})
+        return jsonify({"message": "Provider updated successfully"}), 200
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
+# Route to Delete a Provider by ID
 @provider_bp.route('/<int:provider_id>', methods=['DELETE'])
 def delete_provider(provider_id):
     provider = Provider.query.get_or_404(provider_id)
     try:
         db.session.delete(provider)
         db.session.commit()
-        return jsonify({"message": "Provider deleted successfully"})
+        return jsonify({"message": "Provider deleted successfully"}), 200
     except Exception as e:
         return jsonify({"error": str(e)}), 500
-    
 
 # Route to Create a New Review
-
 @review_bp.route('/', methods=['POST'])
 def create_review():
     data = request.get_json()
+
+    if not data:
+        return jsonify({"error": "Request payload is empty"}), 400
+
     new_review = Review(
         provider_id=data['provider_id'],
         customer_id=data['customer_id'],
@@ -314,6 +338,10 @@ def get_review(review_id):
 def update_review(review_id):
     review = Review.query.get_or_404(review_id)
     data = request.get_json()
+
+    if not data:
+        return jsonify({"error": "Request payload is empty"}), 400
+
     review.rating = data.get('rating', review.rating)
     review.comment = data.get('comment', review.comment)
     try:
@@ -323,7 +351,7 @@ def update_review(review_id):
         return jsonify({"error": str(e)}), 500
 
 @review_bp.route('/<int:review_id>', methods=['DELETE'])
-def delete_review(review_id):
+def delete_review(review_id): 
     review = Review.query.get_or_404(review_id)
     try:
         db.session.delete(review)
@@ -332,12 +360,14 @@ def delete_review(review_id):
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
-
 # Route to Create a New Service
-
 @service_bp.route('/', methods=['POST'])
 def create_service():
     data = request.get_json()
+
+    if not data:
+        return jsonify({"error": "Request payload is empty"}), 400
+
     new_service = Service(
         service_name=data['service_name'],
         description=data.get('description')
@@ -374,6 +404,10 @@ def get_service(service_id):
 def update_service(service_id):
     service = Service.query.get_or_404(service_id)
     data = request.get_json()
+
+    if not data:
+        return jsonify({"error": "Request payload is empty"}), 400
+
     service.service_name = data.get('service_name', service.service_name)
     service.description = data.get('description', service.description)
     try:
