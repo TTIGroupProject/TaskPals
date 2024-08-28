@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import axios from 'axios';
 
 const ServicePage = () => {
-  const { serviceId } = useParams();
+  const { service_name } = useParams();
   const [providers, setProviders] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -12,9 +12,10 @@ const ServicePage = () => {
     const fetchProviders = async () => {
       try {
         const response = await axios.get(`http://localhost:5000/api/provider`, {
-          params: { serviceId }
+          params: { service_name }
         });
         setProviders(response.data);
+        console.log(response.data)
       } catch (err) {
         setError(err.message);
       } finally {
@@ -23,14 +24,16 @@ const ServicePage = () => {
     };
 
     fetchProviders();
-  }, [serviceId]);
+  }, [service_name]);
+
+
 
   if (loading) return <div>Loading providers...</div>;
   if (error) return <div>Error: {error}</div>;
 
   return (
     <div className="container">
-      <h1 className="my-4">Providers for Service ID: {serviceId}</h1>
+      <h1 className="my-4">Providers for {service_name}</h1>
       <div className="row">
         {providers.map((provider) => (
           <div key={provider.provider_id} className="col-md-4 mb-4">
@@ -41,13 +44,10 @@ const ServicePage = () => {
                 alt={provider.name} 
               />
               <div className="card-body">
-                <h5 className="card-title">{provider.name}</h5>
+                <h5 className="card-title">{provider.firstName}{provider.lastName}</h5>
                 <p className="card-text">{provider.bio}</p>
                 <p className="card-text">
-                  <strong>Specialties:</strong> {provider.specialties.join(', ')}
-                </p>
-                <p className="card-text">
-                  <strong>Rating:</strong> {provider.rating} ⭐
+                  <strong>Experience:</strong> {provider.experience}
                 </p>
                 <a href={`mailto:${provider.email}`} className="btn btn-primary">Contact</a>
               </div>
