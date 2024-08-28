@@ -4,7 +4,7 @@ import './Notices.css';
 const Terms = () => {
   return (
     <div className="padding">
-      <h2>Terms and Conditions</h2>
+      <h2 className="text-center">Terms and Conditions</h2>
       
       <h5>1. Introduction</h5>
       <p>Welcome to TaskPals! By accessing or using our mobile application ("App"), you agree to comply with and be bound by the following Terms and Conditions ("Terms"). If you do not agree to these Terms, please do not use our App.</p>

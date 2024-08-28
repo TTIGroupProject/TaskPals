@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import './button.css'; // Ensure you import your CSS file
 
 const Auth = () => {
     const [isLogin, setIsLogin] = useState(true);
@@ -51,7 +52,7 @@ const Auth = () => {
     };
 
     return (
-        <div className="container">
+        <div className="container container-center">
             <form onSubmit={isLogin ? handleLogin : handleRegister} className="mt-4">
                 {!isLogin && (
                     <div className="mb-3">
@@ -100,18 +101,41 @@ const Auth = () => {
                 </div>
                 {errorMsg && <div className="alert alert-danger">{errorMsg}</div>}
                 {successMsg && <div className="alert alert-success">{successMsg}</div>}
-                <button type="submit" className="btn btn-primary">{isLogin ? 'Login' : 'Register'}</button>
-            </form>
-            <div className="mt-3">
-                <small>
-                    {isLogin ? "Don't have an account? " : 'Already have an account? '}
-                    <button onClick={() => setIsLogin(!isLogin)} className="btn btn-link">
-                        {isLogin ? 'Register here' : 'Login here'}
+                <div style={{ marginBottom: '10px' }}>
+                    <button type="submit" className="btn btn-pink"
+                      style={{
+                        backgroundColor: 'rgb(245, 91, 116)',
+                        borderColor: 'rgb(245, 91, 116)',
+                        color: 'white',
+                        width: '100%',  // Make the button full-width
+                      }}
+                      onMouseOver={(e) => {
+                        e.target.style.backgroundColor = 'rgb(225, 71, 96)';
+                        e.target.style.borderColor = 'rgb(225, 71, 96)';
+                      }}
+                      onMouseOut={(e) => {
+                        e.target.style.backgroundColor = 'rgb(245, 91, 116)';
+                        e.target.style.borderColor = 'rgb(245, 91, 116)';
+                      }}>
+                      {isLogin ? 'Login' : 'Register'}
                     </button>
-                </small>
-            </div>
+                </div>
+                <div style={{ textAlign: 'center' }}>
+                    <small>
+                        {isLogin ? "Don't have an account? " : 'Already have an account? '}
+                        <button
+                            onClick={() => setIsLogin(!isLogin)}
+                            className="btn btn-link"
+                            style={{ padding: '0', fontSize: '0.875rem' }}
+                        >
+                            {isLogin ? 'Register here' : 'Login here'}
+                        </button>
+                    </small>
+                </div>
+            </form>
         </div>
     );
 };
 
 export default Auth;
+

@@ -4,7 +4,7 @@ import './Notices.css'
 const DoNotSellMyInfo = () => {
   return (
     <div className="padding">
-      <h1>Do Not Sell My Personal Information</h1>
+      <h1 className="text-center">Do Not Sell My Personal Information</h1>
       <p>
         At TaskPals, we are committed to protecting your privacy and personal
         information. In compliance with the California Consumer Privacy Act

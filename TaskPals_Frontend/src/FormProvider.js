@@ -1,7 +1,16 @@
 import React, { useState } from 'react';
-import { Container, Row, Col, Card, Form, Button } from 'react-bootstrap';
+import { Container, Row, Col, Card, Form, Button, Dropdown } from 'react-bootstrap';
 import WebcamCapture from './WebcamCapture.js';
 import axios from 'axios';
+import cleaning from './images/cleaning.jpg';
+import landscaping from './images/gardener.jpg';
+import plumbing from './images/plumbing.png';
+import exterminator from './images/exterminator.jpg';
+import handyman from './images/drill.jpg';
+import moving from './images/moving.jpg';
+import electricalWork from './images/electrician.jpg';
+import painting from './images/paint.jpg';
+import './FormProvider.css';
 
 const SignupForm = () => {
   const [formData, setFormData] = useState({
@@ -131,7 +140,7 @@ const SignupForm = () => {
   }
 
   return (
-    <Container className="mt-5">
+    <Container className="mt-5 pb-5">
       <Row className="justify-content-center">
         <Col md={6}>
           <Card>
@@ -180,22 +189,21 @@ const SignupForm = () => {
                 </Form.Group>
                 <Form.Group controlId="jobApplyingFor" className="mb-3">
                   <Form.Label>Job Applying For:</Form.Label>
-                  <Form.Control
-                    as="select"
-                    name="jobApplyingFor"
-                    value={formData.jobApplyingFor}
-                    onChange={handleChange}
-                    required
-                  >
-                    <option value="">Select a job</option>
-                    <option value="plumber">Plumber</option>
-                    <option value="electrician">Electrician</option>
-                    <option value="interiorcleaner">Interior Cleaner</option>
-                    <option value="exteriorcleaner">Exterior Cleaner</option>
-                    <option value="gardener">Gardener</option>
-                    <option value="handyman">Handyman</option>
-                    <option value="exterminator">Exterminator</option>
-                  </Form.Control>
+                  <Dropdown className="custom-dropdown" onSelect={(e) => setFormData({ ...formData, jobApplyingFor: e })}>
+                    <Dropdown.Toggle id="dropdown-basic">
+                      {formData.jobApplyingFor || 'Select a job'}
+                    </Dropdown.Toggle>
+                    <Dropdown.Menu>
+                      <Dropdown.Item eventKey="Cleaning">Cleaning<img src={cleaning} alt="cleaning supplies" className="dropdown-item-img" /></Dropdown.Item>
+                      <Dropdown.Item eventKey="Landscaping">Landscaping<img src={landscaping} alt="garden tools" className="dropdown-item-img" /></Dropdown.Item>
+                      <Dropdown.Item eventKey="Plumbing">Plumbing<img src={plumbing} alt="plumbing supplies" className="dropdown-item-img" /></Dropdown.Item>
+                      <Dropdown.Item eventKey="Exterminator">Exterminator<img src={exterminator} alt="bug" className="dropdown-item-img" /></Dropdown.Item>
+                      <Dropdown.Item eventKey="Handy Man">Handy Man<img src={handyman} alt="drill" className="dropdown-item-img" /></Dropdown.Item>
+                      <Dropdown.Item eventKey="Moving">Moving<img src={moving} alt="moving truck" className="dropdown-item-img" /></Dropdown.Item>
+                      <Dropdown.Item eventKey="Electrical Work">Electrical Work<img src={electricalWork} alt="electrical supplies" className="dropdown-item-img" /></Dropdown.Item>
+                      <Dropdown.Item eventKey="Painting">Painting<img src={painting} alt="paint supplies" className="dropdown-item-img" /></Dropdown.Item>
+                    </Dropdown.Menu>
+                  </Dropdown>
                 </Form.Group>
                 <Form.Group controlId="experience" className="mb-3">
                   <Form.Label>Experience (in years):</Form.Label>
@@ -243,7 +251,25 @@ const SignupForm = () => {
                 {profilePictureUrl && (
                   <img src={profilePictureUrl} alt="Profile Preview" style={{ width: '100%', marginTop: '10px' }} />
                 )}
-                <Button type="submit" variant="primary">Apply</Button>
+                <Button
+                  variant="custom"
+                  type="submit"
+                  style={{
+                    backgroundColor: 'rgb(245, 91, 116)',
+                    borderColor: 'rgb(245, 91, 116)',
+                    color: 'white',
+                  }}
+                  onMouseOver={(e) => {
+                    e.target.style.backgroundColor = 'rgb(225, 71, 96)';
+                    e.target.style.borderColor = 'rgb(225, 71, 96)';
+                  }}
+                  onMouseOut={(e) => {
+                    e.target.style.backgroundColor = 'rgb(245, 91, 116)';
+                    e.target.style.borderColor = 'rgb(245, 91, 116)';
+                  }}
+                >
+                  Apply
+                </Button>
               </Form>
               {showCamera && (
                 <WebcamCapture
@@ -260,3 +286,4 @@ const SignupForm = () => {
 };
 
 export default SignupForm;
+

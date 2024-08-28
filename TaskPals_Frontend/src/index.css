@@ -11,3 +11,16 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.nerko-font {
+  font-family: 'Nerko One', sans-serif;
+}
+
+.pink {
+  color: rgb(245, 91, 116);
+}
+
+.pink-background{
+  background-color: pink;
+}
+

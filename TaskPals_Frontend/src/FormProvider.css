@@ -1,0 +1,31 @@
+/* Ensure the dropdown toggle and menu match the input boxes */
+.custom-dropdown .dropdown-toggle {
+  width: 42%;
+  background-color: #fff; /* White background */
+  border: 1px solid #ced4da; /* Match input border color */
+  color: #495057; /* Dark text color */
+}
+
+.custom-dropdown .dropdown-menu {
+  width: 42%;
+  background-color: #fff; /* White background for the menu */
+  border: 1px solid #ced4da; /* Match input border color */
+  border-top: none; /* Remove border between toggle and menu */
+}
+
+.custom-dropdown .dropdown-item {
+  display: flex;
+  align-items: center;
+  color: #495057; /* Dark text color */
+}
+
+.custom-dropdown .dropdown-item:hover {
+  background-color: #f8f9fa; /* Light gray background on hover */
+}
+
+.dropdown-item-img {
+  width: 24px;
+  height: 24px;
+  margin-right: 10px;
+}
+
