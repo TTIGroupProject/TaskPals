@@ -4,7 +4,7 @@ function ProviderProfile2(){
             <div className="container text-center">
             <div className="row">
             <div className="col-lg bg-danger-subtle m-1 rounded mb-5">
-             <img src="https://t4.ftcdn.net/jpg/03/83/25/83/360_F_383258331_D8imaEMl8Q3lf7EKU2Pi78Cn0R7KkW9o.jpg" alt="profile" className="rounded-circle img-thumbnail m-2"></img>
+             <img src="https://t4.ftcdn.net/jpg/03/83/25/83/360_F_383258331_D8imaEMl8Q3lf7EKU2Pi78Cn0R7KkW9o.jpg" alt="profile_pic" className="rounded-circle img-thumbnail m-2"></img>
              <div>
                 <strong className="fs-1">Jane Doe</strong>
              </div>
@@ -61,6 +61,7 @@ function ProviderProfile2(){
                     <li><i className="fa-solid fa-circle fa-xs" style={{color: 'lightcoral'}}></i> Streamline my work processes to complete projects more quickly without compromising quality, allowing me to take on more jobs and increase my earnings.</li><br />
                     <li><i className="fa-solid fa-circle fa-xs" style={{color: 'lightcoral'}}></i> Incorporate more eco-friendly practices and materials into my work to meet growing demand for environmentally conscious options and reduce my business's impact on the environment.</li><br />
                 </ul>
+                <button className="btn" style={{backgroundColor: 'lightcoral'}}>Book Me</button>
             </div>
             </div>
             </div>
