@@ -52,6 +52,8 @@ const Auth = () => {
     };
 
     return (
+        <div>
+        <h1 className='display-3 caveat-font text-center'>{isLogin ? 'Sign In' : 'Create an Account'}</h1>
         <div className="container container-center">
             <form onSubmit={isLogin ? handleLogin : handleRegister} className="mt-4">
                 {!isLogin && (
@@ -104,18 +106,18 @@ const Auth = () => {
                 <div style={{ marginBottom: '10px' }}>
                     <button type="submit" className="btn btn-pink"
                       style={{
-                        backgroundColor: 'rgb(245, 91, 116)',
-                        borderColor: 'rgb(245, 91, 116)',
+                        backgroundColor: 'rgbrgb(240, 128, 128)',
+                        borderColor: 'rgbrgb(240, 128, 128)',
                         color: 'white',
                         width: '100%',  // Make the button full-width
                       }}
                       onMouseOver={(e) => {
-                        e.target.style.backgroundColor = 'rgb(225, 71, 96)';
-                        e.target.style.borderColor = 'rgb(225, 71, 96)';
+                        e.target.style.backgroundColor = 'rgb(243, 95, 95)';
+                        e.target.style.borderColor = 'rgb(243, 95, 95)';
                       }}
                       onMouseOut={(e) => {
-                        e.target.style.backgroundColor = 'rgb(245, 91, 116)';
-                        e.target.style.borderColor = 'rgb(245, 91, 116)';
+                        e.target.style.backgroundColor = 'rgb(240, 128, 128)';
+                        e.target.style.borderColor = 'rgb(240, 128, 128)';
                       }}>
                       {isLogin ? 'Login' : 'Register'}
                     </button>
@@ -133,6 +135,7 @@ const Auth = () => {
                     </small>
                 </div>
             </form>
+        </div>
         </div>
     );
 };

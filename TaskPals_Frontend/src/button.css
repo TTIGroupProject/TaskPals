@@ -51,3 +51,18 @@
   font-size: 16px; /* Adjust font size if needed */
   border-radius: 4px; /* Optional: for rounded corners */
 }
+
+/* button.css */
+.text-rose {
+  color: rgb(220, 73, 92); /* Rose pink color */
+}
+
+.btn-rose {
+  background-color: rgb(220, 73, 92);
+  border-color: rgb(220, 73, 92);
+}
+
+.btn-rose:hover {
+  background-color: rgb(200, 60, 85);
+  border-color: rgb(200, 60, 85);
+}
