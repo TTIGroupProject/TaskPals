@@ -1,7 +1,7 @@
 from flask import Flask
 from flask_jwt_extended import JWTManager
 from flask_cors import CORS
-from flask_marshmallow import Marshmallow  # Import Flask-Marshmallow
+from flask_marshmallow import Marshmallow
 import os
 from dotenv import load_dotenv
 from models import db
@@ -10,12 +10,11 @@ from env import connection
 
 load_dotenv()
 
-ma = Marshmallow()  # Initialize Marshmallow
+ma = Marshmallow()
 
 def create_app():
     app = Flask(__name__)
 
-    # Configure the MySQL connection
     app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv("MYSQL_DATABASE_URI")
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     app.config['JWT_SECRET_KEY'] = os.getenv("JWT_SECRET_KEY")
@@ -24,16 +23,12 @@ def create_app():
 
     db.init_app(app)
     ma.init_app(app)
-
     jwt = JWTManager(app)
 
-    # Initialize CORS
-    CORS(app, resources={r"/*": {"origins": "*"}})  # Allow all origins for development
+    CORS(app, resources={r"/*": {"origins": "*"}})
 
-    # Imports for blueprints
     from routes import customer_bp, provider_bp, review_bp, service_bp, booking_bp
 
-    # Register Blueprints
     app.register_blueprint(customer_bp, url_prefix='/api/customer')
     app.register_blueprint(provider_bp, url_prefix='/api/provider')
     app.register_blueprint(review_bp, url_prefix='/api/review')
@@ -42,15 +37,9 @@ def create_app():
 
     return app
 
-if __name__ == '__main__':
-    app = create_app()
-    with app.app_context():
-        db.create_all()  # Creates database tables based on the defined models
-#   app.run(port=5000)
-    
-try: 
-    conn = pyodbc.connect(connection) 
-    print("Connection successful!") 
-except Exception as e: 
-    print(f"Connection failed: {e}") 
-finally: conn.close()
+app = create_app()
+with app.app_context():
+    db.create_all()  # Creates database tables based on the defined models
+
+# This line should be removed or commented out for production.
+# app.run(port=5000)
