@@ -1,23 +1,19 @@
 import React, { useState, useEffect } from 'react';
-import './HomePage.css';
-import cleaning from './images/cleaning.jpg';
-import landscaping from './images/gardener.jpg';
-import plumbing from './images/plumbing.png';
-import exterminator from './images/exterminator.jpg';
-import handyman from './images/drill.jpg';
-import moving from './images/moving.jpg';
-import electricalWork from './images/electrician.jpg';
-import painting from './images/paint.jpg';
+import './HomePage.css'
+import axios from 'axios'
+import cleaning from './images/cleaning.jpg'
+import landscaping from './images/gardener.jpg'
+import plumbing from './images/plumbing.png'
+import exterminator from './images/exterminator.jpg'
+import handyman from './images/drill.jpg'
+import moving from './images/moving.jpg'
+import electricalWork from './images/electrician.jpg'
+import painting from './images/paint.jpg'
 import StarRating from './StarRating';
+import { useNavigate } from 'react-router-dom';
+
 
 const HomePage = () => {
-  const [reviews, setReviews] = useState([]);
-  const [customers, setCustomers] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-
-  const [selectedService, setSelectedService] = useState('');
-  const [zipcode, setZipcode] = useState('');
 
   useEffect(() => {
     (function(d, m){
@@ -37,50 +33,85 @@ const HomePage = () => {
     })(document, window.kommunicate || {});
   }, []);
 
-  useEffect(() => {
-    (async() => {
-      try {
-        // Fetch reviews
-        const reviewResponse = await fetch('http://localhost:5000/reviews');
-        if (!reviewResponse.ok) throw new Error('Network response was not ok');
-        const reviewData = await reviewResponse.json();
-        setReviews(reviewData);
-        
-        // Fetch customers
-        const customerResponse = await fetch('http://localhost:5000/');
-        if (!customerResponse.ok) throw new Error('Network response was not ok');
-        const customerData = await customerResponse.json();
-        setCustomers(customerData);
-      } catch (err) {
-        setError(err.message);
-      } finally {
-        setLoading(false);
-      }
-    })();
-  }, []);
 
-  // Sort and prepare reviews with customer names
+  const [selectedService, setSelectedService] = useState('');
+  const [zipcode, setZipcode] = useState('');
+  const [providers, setProviders] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+  const [reviews, setReviews] = useState([]);
+
   const sortedReviews = reviews.sort((a, b) => b.rating - a.rating);
   const topReviews = sortedReviews.slice(0, 6);
+  const navigate = useNavigate()
 
-  const reviewsWithCustomerNames = topReviews.map(review => {
-    const customer = customers.find(c => c.customer_id === review.customer_id);
-    return {
-      ...review,
-      name: customer ? customer.name : 'Anonymous Review'
-    };
-  });
-
+  const fetchProviders = async (service) => {
+    setLoading(true);
+    try{
+      const { data } = await axios.get('http://127.0.0.1:5000/api/provider/', {
+        params: {service_name: service}
+      });
+      setProviders(data);
+      setLoading(false);
+    } catch (err) {
+      setError(err.message);
+      setLoading(false);
+    }
+  }
   const isButtonEnabled = selectedService && zipcode;
+
+  const handleFindHelper = () => {
+    if (isButtonEnabled) {
+      fetchProviders(selectedService);
+    }
+  };
+
+  const ServiceMatch = providers.filter(provider => {
+    const jobApplyingFor = provider.jobApplyingFor;
+    if(typeof jobApplyingFor === 'string' && typeof selectedService === 'string') {
+      return jobApplyingFor.toLowerCase().trim() === selectedService.toLowerCase().trim();
+    }
+    return false;
+  })
 
   return (
     <div className='page-wrapper app-container'>
-      <div className='container-fluid p-4'>
-        <div className='text-center mb-4 font-edu'>
-          <h1>Get Hired, <br/> Get Help—All in a Click</h1>
-        </div>
-        <div className='row align-items-center my-color justify-content-center bg-light rounded-3 p-3'>
-          <div className='col-auto'>
+    <div className='container-fluid p-4'>
+      <div className='text-center mb-4 font-edu'>
+        <h1>Get Hired, <br></br>Get Help—All in a Click</h1>
+      </div>
+      <div className='row align-items-center my-color justify-content-center bg-light rounded-3 p-3'>
+      <div className='col-auto'>
+      <div className='dropdown'>
+        <button 
+        className="btn dropdown-toggle fs-6 form-control"  
+        type="button" 
+        id="dropdownMenuButton" 
+        data-bs-toggle="dropdown" 
+        aria-expanded="false"
+        style={{  
+          backgroundColor: '#f8f9fa',
+          border: '1px solid #ced4da',
+          color: '#495057',
+          width: '225px'
+        }}
+        >
+          {selectedService || 'What do you need done?'}
+        </button>
+          <ul className='dropdown-menu' aria-labelledby="dropdownMenuButton">
+              <li id='clean'><a href="#" className="dropdown-item d-flex justify-content-between align-items-center" onClick={() => setSelectedService('Cleaning')}>Cleaning<img src= {cleaning} alt='cleaning supplies'/></a></li>
+              <li id='land'><a href="#" className="dropdown-item d-flex justify-content-between align-items-center" onClick={() => setSelectedService('Landscaping')}>Landscaping<img src={landscaping} alt='garden tools'/></a></li>
+              <li id='plumb'><a href="#" className="dropdown-item d-flex justify-content-between align-items-center" onClick={() => setSelectedService('Plumbing')}>Plumbing<img src={plumbing} alt='plumbing supplies'/></a></li>
+              <li id='ex'><a href="#" className="dropdown-item d-flex justify-content-between align-items-center" onClick={() => setSelectedService('Exterminator')}>Exterminator<img src={exterminator} alt='bug'/></a></li>
+              <li id='hand'><a href="#" className="dropdown-item d-flex justify-content-between align-items-center" onClick={() => setSelectedService('Handy Man')}>Handy Man<img src={handyman} alt='drill'/></a></li>
+              <li id='move'><a href="#" className="dropdown-item d-flex justify-content-between align-items-center" onClick={() => setSelectedService('Moving')}>Moving<img src={moving} alt='moving truck'/></a></li>
+              <li id='elec'><a href="#" className="dropdown-item d-flex justify-content-between align-items-center" onClick={() => setSelectedService('Electrical work')}>Electrical Work<img src={electricalWork} alt='electrical supplies'/></a></li>
+              <li id='paint'><a href="#" className="dropdown-item d-flex justify-content-between align-items-center" onClick={() => setSelectedService('painting')}> Painting<img src={painting} alt='paint supplies'/></a></li>
+              </ul>
+            </div>
+          </div>
+          <div className='col'>
+            <div className='d-flex justify-content-center'>
             <div className='dropdown'>
               <button 
                 className="btn dropdown-toggle fs-6 form-control"  
@@ -94,85 +125,74 @@ const HomePage = () => {
                   color: '#495057',
                   width: '225px'
                 }}
-              >
-                {selectedService || 'What do you need done?'}
-              </button>
+              >{zipcode || 'Where are you?'} </button>
               <ul className='dropdown-menu' aria-labelledby="dropdownMenuButton">
-                <li><a href="#" className="dropdown-item d-flex justify-content-between align-items-center" onClick={() => setSelectedService('Cleaning')}>Cleaning<img src={cleaning} alt='cleaning supplies'/></a></li>
-                <li><a href="#" className="dropdown-item d-flex justify-content-between align-items-center" onClick={() => setSelectedService('Landscaping')}>Landscaping<img src={landscaping} alt='garden tools'/></a></li>
-                <li><a href="#" className="dropdown-item d-flex justify-content-between align-items-center" onClick={() => setSelectedService('Plumbing')}>Plumbing<img src={plumbing} alt='plumbing supplies'/></a></li>
-                <li><a href="#" className="dropdown-item d-flex justify-content-between align-items-center" onClick={() => setSelectedService('Exterminator')}>Exterminator<img src={exterminator} alt='bug'/></a></li>
-                <li><a href="#" className="dropdown-item d-flex justify-content-between align-items-center" onClick={() => setSelectedService('Handy Man')}>Handy Man<img src={handyman} alt='drill'/></a></li>
-                <li><a href="#" className="dropdown-item d-flex justify-content-between align-items-center" onClick={() => setSelectedService('Moving')}>Moving<img src={moving} alt='moving truck'/></a></li>
-                <li><a href="#" className="dropdown-item d-flex justify-content-between align-items-center" onClick={() => setSelectedService('Electrical work')}>Electrical Work<img src={electricalWork} alt='electrical supplies'/></a></li>
-                <li><a href="#" className="dropdown-item d-flex justify-content-between align-items-center" onClick={() => setSelectedService('Painting')}>Painting<img src={painting} alt='paint supplies'/></a></li>
+              <li id='brklyn'><a href="#" className="dropdown-item d-flex justify-content-between align-items-center" onClick={() => setZipcode('Brooklyn')}>Brooklyn</a></li>
+              <li id='ft'><a href="#" className="dropdown-item d-flex justify-content-between align-items-center" onClick={() => setZipcode('Five Towns')}>Five Towns</a></li>
+              <li id='lkwd'><a href="#" className="dropdown-item d-flex justify-content-between align-items-center" onClick={() => setZipcode('Lakewood')}>Lakewood</a></li>
+              <li id='mnsy'><a href="#" className="dropdown-item d-flex justify-content-between align-items-center" onClick={() => setZipcode('Monsey')}>Monsey</a></li>
+              <li id='qwns'><a href="#" className="dropdown-item d-flex justify-content-between align-items-center" onClick={() => setZipcode('Queens')}>Queens</a></li>
+              <li id='si'><a href="#" className="dropdown-item d-flex justify-content-between align-items-center" onClick={() => setZipcode('Staten Island')}>Staten Island</a></li>
               </ul>
+              </div>
             </div>
           </div>
-          <div className='col'>
-            <div className='d-flex justify-content-center'>
-              <input 
-                style={{  
-                  backgroundColor: '#f8f9fa',
-                  border: '1px solid #ced4da',
-                  color: '#495057',
-                  width: '200px'
-                }}
-                type='text' 
-                id='zipcode' 
-                className='form-control bg-light' 
-                placeholder="Please enter the zipcode"
-                value={zipcode}
-                onChange={(e) => setZipcode(e.target.value)}
-              />
-            </div>
-          </div>
-          <div className='col-auto'>
-            <button 
-              className='btn form-control buttonColor' 
-              style={{  
-                backgroundColor: '#f8f9fa',
-                border: '1px solid #ced4da',
-                color: 'black',
-                width: '200px'
-              }}
-              disabled={!isButtonEnabled}
-              onClick={() => {
-                if (isButtonEnabled) {
-                  alert(`Finding helpers for ${selectedService} in zipcode ${zipcode}`);
-                }
-              }}
-            >
+        <div className='col-auto'>
+          <button 
+          className='btn form-control buttonColor' 
+          style={{  
+            backgroundColor: '#f8f9fa',
+            border: '1px solid #ced4da',
+            color: 'black',
+            width: '200px'
+          }}
+          disabled={!isButtonEnabled}
+          onClick={handleFindHelper}>
               Find Helper →
             </button>
+        </div>
+      </div>
+    </div>
+    <div className='row'>
+    {loading ? (
+      <h3>Loading providers...</h3>
+    ) : error ? (
+      <h3>No Providers for this service</h3>
+    ): ServiceMatch.length > 0 ? (
+    ServiceMatch.map((provider) => (
+      <div key={provider.provider_id} className="col-md-4 mb-4">
+       <div className="card">
+        <img src={provider.profile_image || 'https://as1.ftcdn.net/v2/jpg/03/53/11/00/1000_F_353110097_nbpmfn9iHspmtXJeX1ZxE6N01CMjJzUq.jpg'} className="card-img-top"/>
+        <div className="card-body">
+        <h5 className="card-title">{provider.firstName} {provider.lastName}</h5>
+        <p className="card-text">Years of Experience: {provider.experience}</p>
+         <button className="btn btn-danger" onClick={() => navigate(`/provider/${provider.provider_id}`)}>View Profile</button>
+                        </div>
+                      </div>
+                      </div>
+                    ))
+                ) : null}
+    <div className='container mt-5'>
+      <h2 className='text-center mb-4'>Hear from our happy customers</h2>
+      <div className='row'>
+        {topReviews.map((review, index) => (
+          <div key={index} className='col-md-4 mb-4'>
+            <div className='card shadow-sm d-flex flex-column h-100'>
+              <div className='card-body'>
+                <h5 className='card-title'>{review.name}</h5>
+                <p className='card-text'>
+                  <StarRating rating={review.rating}/>
+                </p>
+                <p className='card-text'>{review.comment}</p>
+              </div>
+            </div>
+          </div>
+          ))}
           </div>
         </div>
       </div>
-      <div className='container mt-5'>
-        <h2 className='text-center caveat-font mb-4'>Hear from our happy customers</h2>
-        {loading && <p>Loading reviews...</p>}
-        {error && <p>Error: {error}</p>}
-        {!loading && !error && reviewsWithCustomerNames.length === 0 && <p>No reviews available.</p>}
-        {reviewsWithCustomerNames.length > 0 && (
-          <div className='row'>
-            {reviewsWithCustomerNames.map((review) => (
-              <div key={review.id} className='col-md-4 mb-4'>
-                <div className='card shadow-sm d-flex flex-column h-100'>
-                  <div className='card-body'>
-                    <h5 className='card-title'>{review.name}</h5>
-                    <p className='card-text'>
-                      <StarRating rating={review.rating} />
-                    </p>
-                    <p className='card-text'>{review.comment}</p>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        )}
-      </div>
     </div>
-  );
-};
+    );
+  }
 
 export default HomePage;

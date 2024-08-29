@@ -1,5 +1,4 @@
 import React, { useState, useEffect} from "react";
-
 function getDate(date) {
     const options = {
         weekday: 'long', 
@@ -98,7 +97,7 @@ function BookingForm(){
 
     return (
         <div>
-            <button className="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">Book Now</button>
+            <button className="btn" style={{background: 'lightcoral'}} type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">Book Now</button>
 
             <div className="offcanvas offcanvas-end" tabIndex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
             <div className="offcanvas-header">
@@ -127,7 +126,7 @@ function BookingForm(){
                 <br/>
                 <span className="input-group-text">You Chose: {selectedTime}</span>
                 <br/>
-                <div className="d-grid"><button type="submit" className="btn btn-lg btn-secondary">Book</button></div>
+                <div className="d-grid"><button type="submit" className="btn btn-lg btn-danger">Book</button></div>
             </div>
             </div>
     </div>
