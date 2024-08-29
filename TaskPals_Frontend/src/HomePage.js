@@ -16,7 +16,8 @@ import { useNavigate } from 'react-router-dom';
 const HomePage = () => {
 
   useEffect(() => {
-    (function(d, m){
+    if(!document.getElementById('kommunicate-script')){
+      (function(d, m){
       var kommunicateSettings = {
         "appId": "314960aa0bca5101b2c8718bbbec660af",
         "popupWidget": true,
@@ -26,12 +27,16 @@ const HomePage = () => {
       s.type = "text/javascript";
       s.async = true;
       s.src = "https://widget.kommunicate.io/v2/kommunicate.app";
+      s.id = 'kommunicate-script';
       var h = document.getElementsByTagName("head")[0];
       h.appendChild(s);
       window.kommunicate = m;
       m._globals = kommunicateSettings;
     })(document, window.kommunicate || {});
+    }
   }, []);
+    
+    
 
 
   const [selectedService, setSelectedService] = useState('');
