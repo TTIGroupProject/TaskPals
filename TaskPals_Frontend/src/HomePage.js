@@ -11,7 +11,7 @@ import electricalWork from './images/electrician.jpg'
 import painting from './images/paint.jpg'
 import StarRating from './StarRating';
 import { useNavigate } from 'react-router-dom';
-
+import homePic from "./images/homePic.jpg";
 
 const HomePage = () => {
 
@@ -82,6 +82,9 @@ const HomePage = () => {
   return (
     <div className='page-wrapper app-container'>
     <div className='container-fluid p-4'>
+    <div className='container-fluid p-4 d-flex justify-content-center align-items-center'>
+  <img src={homePic} alt='our team' className='img-fluid home-image' />
+</div>
       <div className='text-center mb-4 font-edu'>
         <h1>Get Hired, <br></br>Get Help—All in a Click</h1>
       </div>
