@@ -194,14 +194,14 @@ const SignupForm = () => {
                       {formData.jobApplyingFor || 'Select a job'}
                     </Dropdown.Toggle>
                     <Dropdown.Menu>
-                      <Dropdown.Item eventKey="Cleaning">Cleaning<img src={cleaning} alt="cleaning supplies" className="dropdown-item-img" /></Dropdown.Item>
-                      <Dropdown.Item eventKey="Landscaping">Landscaping<img src={landscaping} alt="garden tools" className="dropdown-item-img" /></Dropdown.Item>
-                      <Dropdown.Item eventKey="Plumbing">Plumbing<img src={plumbing} alt="plumbing supplies" className="dropdown-item-img" /></Dropdown.Item>
-                      <Dropdown.Item eventKey="Exterminator">Exterminator<img src={exterminator} alt="bug" className="dropdown-item-img" /></Dropdown.Item>
-                      <Dropdown.Item eventKey="Handy Man">Handy Man<img src={handyman} alt="drill" className="dropdown-item-img" /></Dropdown.Item>
-                      <Dropdown.Item eventKey="Moving">Moving<img src={moving} alt="moving truck" className="dropdown-item-img" /></Dropdown.Item>
-                      <Dropdown.Item eventKey="Electrical Work">Electrical Work<img src={electricalWork} alt="electrical supplies" className="dropdown-item-img" /></Dropdown.Item>
-                      <Dropdown.Item eventKey="Painting">Painting<img src={painting} alt="paint supplies" className="dropdown-item-img" /></Dropdown.Item>
+                      <Dropdown.Item eventKey="Cleaning" id='clean'>Cleaning<img src={cleaning} alt="cleaning supplies" className="dropdown-item-img" /></Dropdown.Item>
+                      <Dropdown.Item eventKey="Landscaping" id='land'>Landscaping<img src={landscaping} alt="garden tools" className="dropdown-item-img"/></Dropdown.Item>
+                      <Dropdown.Item eventKey="Plumbing" id='pumb'>Plumbing<img src={plumbing} alt="plumbing supplies" className="dropdown-item-img" /></Dropdown.Item>
+                      <Dropdown.Item eventKey="Exterminator" id='ex'>Exterminator<img src={exterminator} alt="bug" className="dropdown-item-img" /></Dropdown.Item>
+                      <Dropdown.Item eventKey="Handy Man" id='hand'>Handy Man<img src={handyman} alt="drill" className="dropdown-item-img" /></Dropdown.Item>
+                      <Dropdown.Item eventKey="Moving" id='mov'>Moving<img src={moving} alt="moving truck" className="dropdown-item-img" /></Dropdown.Item>
+                      <Dropdown.Item eventKey="Electrical Work" id='elec'>Electrical Work<img src={electricalWork} alt="electrical supplies" className="dropdown-item-img" /></Dropdown.Item>
+                      <Dropdown.Item eventKey="Painting" id='paint'>Painting<img src={painting} alt="paint supplies" className="dropdown-item-img" /></Dropdown.Item>
                     </Dropdown.Menu>
                   </Dropdown>
                 </Form.Group>
