@@ -43,7 +43,11 @@ const WebcamCapture = ({ onCapture, onClose }) => {
         ref={webcamRef}
         screenshotFormat="image/jpeg"
         videoConstraints={videoConstraints}
-        style={{ width: '100%' }}
+        style={{
+          width: '100%',
+          borderRadius: '50%',  
+          overflow: 'hidden',   
+        }}
       />
       <div>
         {!capturing ? (
@@ -52,7 +56,18 @@ const WebcamCapture = ({ onCapture, onClose }) => {
           <>
             <button onClick={handleRetake}>Retake Photo</button>
             <button onClick={handleUsePhoto}>Use Photo</button>
-            {imgSrc && <img src={imgSrc} alt="Captured" style={{ width: '100%', marginTop: '10px' }} />}
+            {imgSrc && (
+              <img
+                src={imgSrc}
+                alt="Captured"
+                style={{
+                  width: '100%',
+                  marginTop: '10px',
+                  borderRadius: '50%',  
+                  overflow: 'hidden',   
+                }}
+              />
+            )}
           </>
         )}
       </div>
