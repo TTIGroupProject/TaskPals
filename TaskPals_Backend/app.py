@@ -35,9 +35,10 @@ def create_app():
 
     return app
 
-app = create_app()
-with app.app_context():
-    db.create_all()  # Creates database tables based on the defined models
 
-# This line should be removed or commented out for production.
-# app.run(port=5000)
+if __name__ == '__main__':
+    app = create_app()
+    with app.app_context():
+        db.create_all()  # Creates database tables based on the defined models
+   # app.run(port=5000)
+    debug=True
