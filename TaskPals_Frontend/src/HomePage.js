@@ -11,12 +11,13 @@ import electricalWork from './images/electrician.jpg'
 import painting from './images/paint.jpg'
 import StarRating from './StarRating';
 import { useNavigate } from 'react-router-dom';
-
+import homePic from "./images/homePic.jpg";
 
 const HomePage = () => {
 
   useEffect(() => {
-    (function(d, m){
+    if(!document.getElementById('kommunicate-script')){
+      (function(d, m){
       var kommunicateSettings = {
         "appId": "314960aa0bca5101b2c8718bbbec660af",
         "popupWidget": true,
@@ -26,12 +27,16 @@ const HomePage = () => {
       s.type = "text/javascript";
       s.async = true;
       s.src = "https://widget.kommunicate.io/v2/kommunicate.app";
+      s.id = 'kommunicate-script';
       var h = document.getElementsByTagName("head")[0];
       h.appendChild(s);
       window.kommunicate = m;
       m._globals = kommunicateSettings;
     })(document, window.kommunicate || {});
+    }
   }, []);
+    
+    
 
 
   const [selectedService, setSelectedService] = useState('');
@@ -77,6 +82,9 @@ const HomePage = () => {
   return (
     <div className='page-wrapper app-container'>
     <div className='container-fluid p-4'>
+    <div className='container-fluid p-4 d-flex justify-content-center align-items-center'>
+  <img src={homePic} alt='our team' className='img-fluid home-image' />
+</div>
       <div className='text-center mb-4 font-edu'>
         <h1>Get Hired, <br></br>Get Help—All in a Click</h1>
       </div>

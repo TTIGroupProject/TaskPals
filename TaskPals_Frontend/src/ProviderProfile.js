@@ -2,7 +2,6 @@ import React from "react";
 import { useParams, Link} from "react-router-dom";
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import BookingForm from "./BookingForm";
 
 function getDate(date) {
     const options = {
@@ -133,14 +132,14 @@ function ProviderProfile(){
             <div className="col-lg bg-danger-subtle m-1 rounded mb-5">
              <img src={providerDetails.profile_image || 'https://as1.ftcdn.net/v2/jpg/03/53/11/00/1000_F_353110097_nbpmfn9iHlxef4EDIhXB1tdTD0lcWhG9.jpg'} alt="profile_pic" className="rounded-circle img-thumbnail m-2"></img>
              <div>
-                <strong className="fs-1">{providerDetails.firstname} {providerDetails.lastname}</strong>
+                <strong className="fs-1">{providerDetails.firstName} {providerDetails.lastName}</strong>
              </div>
              <h5 className="fw-light text-danger">{providerDetails.jobApplyingFor}</h5>
              <br />
              <i className="fa-solid fa-quote-left fa-2xl" style={{ color: 'goldenrod'}}></i>
              <div className="lh-1">
-             <p className="text-center fw-medium m-2">need a quote</p>
-             <figcaption className="fw-lighter">need a quote source</figcaption>
+             <p className="text-center fw-medium m-2">As a TaskPals Provider I am here for You</p>
+             <figcaption className="fw-lighter">-{providerDetails.firstName} {providerDetails.lastName}</figcaption>
              </div>
              <br />
              <div className="p-3 rounded" style={{background: 'lightcoral'}}>
@@ -182,7 +181,12 @@ function ProviderProfile(){
             </div>
             <div className="col-lg bg-danger-subtle m-1 mb-5 rounded">
             <h2 className="fw-medium text-start m-3">Goals</h2>
-                {/* <ListGoals Goals={providerDetails.goals}/> */}
+                <ul className="text-start">
+                    <li>Commit to continuous learning and development by exploring new techniques, tools, and methods relevant to your field. Whether it's through formal education, on-the-job training, or self-directed learning, aim to expand your expertise to stay ahead in your profession. </li>
+                    <li>Identify opportunities to streamline your work processes, minimize time spent on repetitive tasks, and maximize output. This could involve adopting new technologies, refining your workflow, or developing better time management strategies to achieve more in less time.</li>
+                    <li>Invest time in building meaningful connections with colleagues, clients, and other stakeholders. Effective communication, collaboration, and networking can open doors to new opportunities, enhance teamwork, and create a more supportive and productive work environment.</li>
+                    <li>Strive to achieve a balance between your professional responsibilities and personal life to avoid burnout. Set clear boundaries, prioritize self-care, and make time for activities and relationships that bring you joy and relaxation outside of work.</li>
+                </ul>
                 <button className="btn" style={{backgroundColor: 'lightcoral'}} data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">Book Me</button>
 
                 <div className="offcanvas offcanvas-end" tabIndex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">

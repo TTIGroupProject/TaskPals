@@ -1,3 +1,4 @@
+import base64
 from flask import Blueprint, request, jsonify
 from models import db, Customer, Booking, Review, Provider, Service
 import bcrypt
@@ -191,6 +192,16 @@ def create_provider():
 
     if not data:
         return jsonify({"error": "Request payload is empty"}), 400
+
+    profile_picture_data = data.get('profilePicture')
+
+    if profile_picture_data:
+        filename = f"{data.get('firstName')}_{data.get('lastName')}.png"
+        file_path = os.path.join(UPLOAD_FOLDER, filename)
+        # Decode the base64 string back to binary
+        with open(file_path, "wb") as fh:
+            fh.write(base64.b64decode(profile_picture_data.split(',')[1]))  # Ignore the data URI scheme prefix
+        data['profilePicture'] = filename
 
     new_provider = Provider(
         firstName=data.get('firstName'),
