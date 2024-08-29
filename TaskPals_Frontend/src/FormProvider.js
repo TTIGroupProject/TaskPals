@@ -145,7 +145,7 @@ const SignupForm = () => {
         <Col md={6}>
           <Card>
             <Card.Body>
-              <h1 className="card-title text-center mb-4">Signup for TaskPals</h1>
+              <h1 className="card-title text-center display-3 caveat-font  mb-4">Signup for TaskPals</h1>
               <Form onSubmit={handleSubmit}>
                 <Form.Group controlId="firstName" className="mb-3">
                   <Form.Label>First Name:</Form.Label>
@@ -255,17 +255,17 @@ const SignupForm = () => {
                   variant="custom"
                   type="submit"
                   style={{
-                    backgroundColor: 'rgb(245, 91, 116)',
-                    borderColor: 'rgb(245, 91, 116)',
+                    backgroundColor: 'rgb(240, 128, 128)',
+                    borderColor: 'rgb(240, 128, 128)',
                     color: 'white',
                   }}
                   onMouseOver={(e) => {
-                    e.target.style.backgroundColor = 'rgb(225, 71, 96)';
-                    e.target.style.borderColor = 'rgb(225, 71, 96)';
+                    e.target.style.backgroundColor = 'rgb(243, 95, 95)';
+                    e.target.style.borderColor = 'rgb(243, 95, 95)';
                   }}
                   onMouseOut={(e) => {
-                    e.target.style.backgroundColor = 'rgb(245, 91, 116)';
-                    e.target.style.borderColor = 'rgb(245, 91, 116)';
+                    e.target.style.backgroundColor = 'rgb(240, 128, 128)';
+                    e.target.style.borderColor = 'rgb(240, 128, 128)';
                   }}
                 >
                   Apply

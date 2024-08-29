@@ -33,7 +33,7 @@ const AboutUs = () => {
           <div className="col-md-6 mb-4">
             <div className="card shadow-sm">
               <div className="card-body text-center">
-                <FaSearch size={40} style={{ color: 'rgb(245, 91, 116)' }} className="mb-3" />
+                <FaSearch size={40} style={{ color: 'rgb(243, 95, 95)' }} className="mb-3" />
                 <h4 className="card-title">Browse</h4>
                 <p className="card-text">Explore our wide range of services and find the perfect helper for your needs.</p>
               </div>
@@ -42,7 +42,7 @@ const AboutUs = () => {
           <div className="col-md-6 mb-4">
             <div className="card shadow-sm">
               <div className="card-body text-center">
-                <FaLink size={40} style={{ color: 'rgb(245, 91, 116)' }} className="mb-3" />
+                <FaLink size={40} style={{ color: 'rgb(243, 95, 95)' }} className="mb-3" />
                 <h4 className="card-title">Connect</h4>
                 <p className="card-text">Use our easy-to-navigate platform to communicate directly with potential helpers.</p>
               </div>
@@ -51,7 +51,7 @@ const AboutUs = () => {
           <div className="col-md-6 mb-4">
             <div className="card shadow-sm">
               <div className="card-body text-center">
-                <FaCalendarAlt size={40} style={{ color: 'rgb(245, 91, 116)' }} className="mb-3" />
+                <FaCalendarAlt size={40} style={{ color: 'rgb(243, 95, 95)' }} className="mb-3" />
                 <h4 className="card-title">Schedule</h4>
                 <p className="card-text">Arrange a time that works best for you and your helper.</p>
               </div>
@@ -60,7 +60,7 @@ const AboutUs = () => {
           <div className="col-md-6 mb-4">
             <div className="card shadow-sm">
               <div className="card-body text-center">
-                <FaSmileBeam size={40} style={{ color: 'rgb(245, 91, 116)' }} className="mb-3" />
+                <FaSmileBeam size={40} style={{ color: 'rgb(243, 95, 95)' }} className="mb-3" />
                 <h4 className="card-title">Relax</h4>
                 <p className="card-text">Enjoy a clean, organized, and stress-free home!</p>
               </div>
@@ -73,7 +73,7 @@ const AboutUs = () => {
         <h2 className="display-5 caveat-font mb-4">Our Promise</h2>
         <div className="card mx-auto" style={{ maxWidth: '600px' }}>
           <div className="card-body text-center">
-            <FaShieldAlt size={40} style={{ color: 'rgb(245, 91, 116)' }} className="mb-3" />
+            <FaShieldAlt size={40} style={{ color: 'rgb(243, 95, 95)' }} className="mb-3" />
             <p>
               At TaskPals, we are committed to excellence and reliability. Our team strives to exceed your expectations with every task completed. We value open communication, professionalism, and a strong work ethic, ensuring you receive the highest quality service every time.
             </p>
