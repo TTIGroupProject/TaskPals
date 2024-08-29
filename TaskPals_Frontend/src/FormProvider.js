@@ -21,11 +21,10 @@ const SignupForm = () => {
     jobApplyingFor: '',
     experience: '',
     bio: '',
-    profilePicture: null,
+    profilePicture: '',
   });
 
   const [submitted, setSubmitted] = useState(false);
-  const [profilePictureUrl, setProfilePictureUrl] = useState('');
   const [cameraOption, setCameraOption] = useState('');
   const [showCamera, setShowCamera] = useState(false);
 
@@ -33,14 +32,13 @@ const SignupForm = () => {
     const { name, value, type, files } = e.target;
     if (type === 'file') {
       const file = files[0];
-      setFormData({
-        ...formData,
-        [name]: file
-      });
       if (file) {
         const reader = new FileReader();
         reader.onloadend = () => {
-          setProfilePictureUrl(reader.result);
+          setFormData({
+            ...formData,
+            profilePicture: reader.result
+          });
         };
         reader.readAsDataURL(file);
       }
@@ -56,27 +54,26 @@ const SignupForm = () => {
     e.preventDefault();
 
     const { firstName, lastName, email, phoneNumber, jobApplyingFor, experience, bio, profilePicture } = formData;
-    if (!firstName || !lastName || !email || !phoneNumber || !jobApplyingFor || !experience || !bio) {
+    if (!firstName || !lastName || !email || !phoneNumber || !jobApplyingFor || !experience || !bio || !profilePicture) {
       alert('All fields are required!');
       return;
     }
 
-    const form = new FormData();
-    form.append('firstName', firstName);
-    form.append('lastName', lastName);
-    form.append('email', email);
-    form.append('phoneNumber', phoneNumber);
-    form.append('jobApplyingFor', jobApplyingFor);
-    form.append('experience', experience);
-    form.append('bio', bio);
-    if (profilePicture) {
-      form.append('profilePicture', profilePicture);
-    }
+    const jsonPayload = {
+      firstName,
+      lastName,
+      email,
+      phoneNumber,
+      jobApplyingFor,
+      experience,
+      bio,
+      profilePicture
+    };
 
     try {
-      await axios.post('http://localhost:5000/api/provider', form, {
+      await axios.post('http://localhost:5000/api/provider', jsonPayload, {
         headers: {
-          'Content-Type': 'multipart/form-data'
+          'Content-Type': 'application/json'
         }
       });
       setSubmitted(true);
@@ -96,11 +93,7 @@ const SignupForm = () => {
   };
 
   const handlePhotoCapture = (imageSrc) => {
-    setProfilePictureUrl(imageSrc);
-    setFormData({
-      ...formData,
-      profilePicture: imageSrc
-    });
+    setFormData({ ...formData, profilePicture: imageSrc });
     setShowCamera(false);
   };
 
@@ -113,10 +106,9 @@ const SignupForm = () => {
     if (file) {
       const reader = new FileReader();
       reader.onloadend = () => {
-        setProfilePictureUrl(reader.result);
         setFormData({
           ...formData,
-          profilePicture: file
+          profilePicture: reader.result
         });
       };
       reader.readAsDataURL(file);
@@ -145,7 +137,7 @@ const SignupForm = () => {
         <Col md={6}>
           <Card>
             <Card.Body>
-              <h1 className="card-title text-center display-3 caveat-font  mb-4">Signup for TaskPals</h1>
+              <h1 className="card-title text-center display-3 caveat-font mb-4">Signup for TaskPals</h1>
               <Form onSubmit={handleSubmit}>
                 <Form.Group controlId="firstName" className="mb-3">
                   <Form.Label>First Name:</Form.Label>
@@ -248,8 +240,8 @@ const SignupForm = () => {
                     onChange={handleFileChange}
                   />
                 </Form.Group>
-                {profilePictureUrl && (
-                  <img src={profilePictureUrl} alt="Profile Preview" style={{ width: '100%', marginTop: '10px' }} />
+                {formData.profilePicture && (
+                  <img src={formData.profilePicture} alt="Profile Preview" style={{ width: '100%', marginTop: '10px' }} />
                 )}
                 <Button
                   variant="custom"
@@ -286,4 +278,3 @@ const SignupForm = () => {
 };
 
 export default SignupForm;
-
