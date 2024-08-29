@@ -5,8 +5,6 @@ from flask_marshmallow import Marshmallow
 import os
 from dotenv import load_dotenv
 from models import db
-import pyodbc
-from env import connection
 
 load_dotenv()
 
