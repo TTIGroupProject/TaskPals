@@ -55,7 +55,7 @@ const Auth = () => {
         <div>
         <h1 className='display-3 caveat-font text-center'>{isLogin ? 'Sign In' : 'Create an Account'}</h1>
         <div className="container container-center">
-            <form onSubmit={isLogin ? handleLogin : handleRegister} className="mt-4">
+            <form onSubmit={isLogin ? handleLogin : handleRegister} className="mt-4 pb-lg-7 pb-md-5 pb-sm-4">
                 {!isLogin && (
                     <div className="mb-3">
                         <label htmlFor="name" className="form-label">Name</label>
@@ -106,8 +106,8 @@ const Auth = () => {
                 <div style={{ marginBottom: '10px' }}>
                     <button type="submit" className="btn btn-pink"
                       style={{
-                        backgroundColor: 'rgbrgb(240, 128, 128)',
-                        borderColor: 'rgbrgb(240, 128, 128)',
+                        backgroundColor: 'rgb(240, 128, 128)',
+                        borderColor: 'rgb(240, 128, 128)',
                         color: 'white',
                         width: '100%',  // Make the button full-width
                       }}
